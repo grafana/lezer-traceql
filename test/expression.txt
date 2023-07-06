@@ -1,0 +1,9 @@
+# Spanset expression AND spanset expression
+{ } && { }
+==>
+TraceQL(SpansetPipeline(SpansetExpression(SpansetExpression(SpansetFilter), SpansetExpression(SpansetFilter))))
+
+# Spanset content
+{ duration > 1s }
+==>
+TraceQL(SpansetPipeline(SpansetExpression(SpansetFilter(FieldExpression(FieldExpression(IntrinsicField), FieldOp, FieldExpression(Static(Duration)))))))

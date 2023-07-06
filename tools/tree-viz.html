@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/d3@6.7.0/dist/d3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@hpcc-js/wasm@1.12.8/dist/index.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3-graphviz@4.1.0/build/d3-graphviz.min.js"></script>
+
+    <script type="importmap">
+      {
+        "imports": {
+          "@grafana/lezer-traceql": "https://cdn.jsdelivr.net/npm/@grafana/lezer-traceql@latest/index.es.js",
+          "@lezer/lr": "https://cdn.jsdelivr.net/npm/@lezer/lr@1.0.0/dist/index.js",
+          "@lezer/common": "https://cdn.jsdelivr.net/npm/@lezer/common@1.0.0/dist/index.js"
+        }
+      }
+    </script>
+
+    <style>
+      #out > svg {
+        width: 100%;
+        height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <textarea style="width: 100%; resize: vertical" id="in" type="text">count_over_time({level="info"}[10s])</textarea>
+    <div id="cursor-pos"></div>
+    <div id="out"></div>
+    <script type="module">
+      import('@grafana/lezer-traceql').then(
+        (lezerTraceql) => {
+          const inElem = document.querySelector('#in');
+          const cursorPosElem = document.querySelector('#cursor-pos');
+
+          let currentlyVisualizedText = '';
+          let currentlyVisualizedPos = 0;
+
+          const graphViz = d3.select('#out').graphviz();
+
+          inElem.focus();
+          inElem.setSelectionRange(25, 25);
+
+          function getNodeText(node) {
+            const prefix = node.type.isError ? 'ERROR' : node.name;
+            return `${prefix}_${node.index}__${node.from}_${node.to}`;
+          }
+
+          function getGraphLine(node) {
+            const nodeText = getNodeText(node);
+            if (node.parent != null) {
+              const parentText = getNodeText(node.parent);
+              return `${parentText}->${nodeText}`;
+            }
+          }
+
+          function render() {
+            const text = inElem.value;
+            const pos = inElem.selectionStart;
+
+            if (text === currentlyVisualizedText && pos === currentlyVisualizedPos) {
+              // no changes
+              return;
+            }
+
+            const tree = lezerTraceql.parser.parse(text);
+            const cur = tree.cursor(0);
+            const graphLines = [];
+            graphLines.push(getGraphLine(cur.node));
+            while (cur.next()) {
+              graphLines.push(getGraphLine(cur.node));
+            }
+
+            const posCur = tree.cursor(pos);
+
+            const nodeText = getNodeText(tree.cursor(pos));
+
+            const graphText = `digraph {
+              ${graphLines.join('\n')}
+              ${nodeText} [style=filled]
+            }`.trim();
+
+            graphViz.renderDot(graphText);
+
+            currentlyVisualizedText = text;
+            currentlyVisualizedPos = pos;
+
+            cursorPosElem.innerHTML = pos.toString();
+          }
+
+          render();
+
+          inElem.addEventListener('keyup', render);
+          inElem.addEventListener('click', render);
+        },
+        (error) => {
+          window.alert('module import failed. this requires a browser with import map support.');
+          console.error(error);
+        }
+      );
+    </script>
+  </body>
+</html>

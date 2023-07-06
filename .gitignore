@@ -1,0 +1,7 @@
+/.vscode
+/.idea
+/node_modules/
+/src/parser.*
+.tern-*
+/dist/
+notes.txt

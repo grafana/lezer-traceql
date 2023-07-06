@@ -1,0 +1,132 @@
+
+@top TraceQL {
+    SpansetPipeline |
+    SpansetPipelineExpression
+}
+
+@precedence {
+    and @left
+    or @left
+    gt @left
+    desc @left
+    tilde @left
+    fieldOp @left
+    prefix
+    close_paren
+}
+
+SpansetPipelineExpression {
+    "(" SpansetPipelineExpression !close_paren ")" |
+    SpansetPipelineExpression !and and SpansetPipelineExpression |
+    SpansetPipelineExpression !gt gt SpansetPipelineExpression |
+    SpansetPipelineExpression !desc desc SpansetPipelineExpression |
+    SpansetPipelineExpression !or or SpansetPipelineExpression |
+    SpansetPipelineExpression !tilde tilde SpansetPipelineExpression |
+    WrappedSpansetPipeline
+}
+
+WrappedSpansetPipeline {
+    "(" SpansetPipeline !close_paren ")"
+}
+
+SpansetPipeline {
+    SpansetExpression
+}
+
+SpansetExpression {
+    WrappedSpansetExpression |
+    SpansetExpression !and and SpansetExpression |
+    SpansetExpression !gt gt SpansetExpression |
+    SpansetExpression !desc desc SpansetExpression |
+    SpansetExpression !or or SpansetExpression |
+    SpansetExpression !tilde tilde SpansetExpression |
+    SpansetFilter
+}
+
+WrappedSpansetExpression {
+    "(" SpansetExpression !close_paren ")"
+}
+
+SpansetFilter {
+    "{" "}" |
+    "{" FieldExpression "}"
+}
+
+FieldExpression {
+    "(" FieldExpression ")" |
+    FieldExpression !fieldOp FieldOp FieldExpression |
+    FieldExpression !and "&&" FieldExpression |
+    FieldExpression !or "||" FieldExpression |
+    !prefix "-" FieldExpression |
+    !prefix "!" FieldExpression |
+    Static | IntrinsicField | AttributeField
+}
+
+Static {
+    String |
+    Integer |
+    Float |
+    "true" |
+    "false" |
+    "nil" |
+    Duration |
+    "ok" |
+    "error" |
+    "unset" |
+    "unspecified" |
+    "internal" |
+    "server" |
+    "client" |
+    "producer" |
+    "consumer"
+}
+
+IntrinsicField {
+    "duration" |
+    "CHILDCOUNT" |
+    "name" |
+    "status" |
+    "kind" |
+    Parent |
+    "rootName" |
+    "rootServiceName" |
+    "traceDuration"
+}
+
+AttributeField {
+    "." Identifier |
+    Resource "." Identifier |
+    Span "." Identifier |
+    Parent "." Identifier |
+    Parent "." Resource "." Identifier |
+    Parent "." Span "." Identifier
+}
+
+
+@tokens {
+    whitespace { std.whitespace+ }
+    String { "[^\"]*" }
+    Integer { @digit+ }
+    Float { @digit+ "." @digit+ }
+    Duration { @digit+ ("ms"|"s"|"m"|"h") }
+
+    @precedence { Float, Duration, Integer }
+
+    Identifier { $[a-zA-Z_]$[a-zA-Z0-9_]* }
+    and { "&&" }
+    or { "||" }
+    gt { ">" }
+    desc { ">>" }
+    tilde { "~" }
+    FieldOp { "+" | "-" | "*" | "/" | "%" | "==" | "!=" | "<" | "<=" | ">" | ">=" | "~" | "!~" | "^" }
+
+    Parent { "parent" }
+    Resource { "resource" }
+    Span { "span" }
+
+    @precedence { Parent, Resource, Span, Identifier }
+}
+
+@skip {
+    whitespace
+}
