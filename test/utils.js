@@ -48,7 +48,7 @@ export function fileTests(file, fileName) {
         let m = caseExpr.exec(file)
         if (!m) throw new Error(`Unexpected file format in ${fileName} around\n\n${toLineContext(file, lastIndex)}`)
 
-        let [, name, configStr] = /(.*?)(\{.*?\})?$/.exec(m[1])
+        let [, name, configStr] = /([^\n]*)(\{.*?\})?$/.exec(m[1])
         let config = configStr ? JSON.parse(configStr) : null
 
         let text = m[2].trim(), expected = m[3].trim()
@@ -82,7 +82,7 @@ export function fileTests(file, fileName) {
  * @returns {string}
  */
 function normalizeExpect(expected) {
-    return expected.split('\n').map(s => s.trim()).join('').replace(/,(\S)/g,', $1')
+    return expected.split('\n').map(s => s.trim()).join('').replace(/,(\S)/g, ', $1')
 }
 
 /**
@@ -94,7 +94,7 @@ function normalizeExpect(expected) {
 function getDiffIndex(s1, s2) {
     const length = Math.min(s1.length, s2.length)
     let i = 0
-    for (;i < length; i++) {
+    for (; i < length; i++) {
         if (s1.charAt(i) !== s2.charAt(i)) {
             break
         }
