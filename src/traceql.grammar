@@ -121,7 +121,9 @@ FieldExpression {
     FieldExpression !or "||" FieldExpression |
     !prefix "-" FieldExpression |
     !prefix "!" FieldExpression |
-    Static | IntrinsicField | AttributeField
+    Static |
+    IntrinsicField |
+    AttributeField
 }
 
 Static {
@@ -145,7 +147,7 @@ Static {
 
 IntrinsicField {
     "duration" |
-    "CHILDCOUNT" |
+    "childCount" |
     "name" |
     "status" |
     "kind" |
@@ -167,23 +169,23 @@ AttributeField {
 
 @tokens {
     whitespace { std.whitespace+ }
-    String { "[^\"]*" }
+    String { '"' (![\\\n"]+)* '"' }
     Integer { @digit+ }
     Float { @digit+ "." @digit+ }
     Duration { @digit+ ("ms"|"s"|"m"|"h") }
 
     @precedence { Float, Duration, Integer }
 
-    Identifier { $[a-zA-Z_]$[a-zA-Z0-9_]* }
+    Identifier { $[a-zA-Z_.]$[a-zA-Z0-9_.]* }
     and { "&&" }
     or { "||" }
     gt { ">" }
     desc { ">>" }
     tilde { "~" }
     pipe { "|" }
-    ComparisonOp { "=" | "!=" | "<" | "<=" | ">" | ">=" }
+    ComparisonOp { "=" | "!=" | "<" | "<=" | ">" | ">=" | "=~" | "!~" }
     ScalarOp {"+" | "-" | "*" | "/" | "%" | "^"  }
-    FieldOp {  ComparisonOp | ScalarOp | tilde | "!~" }
+    FieldOp {  ComparisonOp | ScalarOp | tilde}
 
     Parent { "parent" }
     Resource { "resource" }
