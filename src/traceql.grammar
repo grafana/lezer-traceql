@@ -33,7 +33,22 @@ WrappedSpansetPipeline {
 
 SpansetPipeline {
     SpansetExpression |
-    ScalarFilter
+    ScalarFilter |
+    GroupOperation |
+    SelectOperation
+}
+
+GroupOperation {
+    "by" "(" FieldExpression ")"
+}
+
+SelectOperation {
+    "select" "(" SelectArgs ")"
+}
+
+SelectArgs {
+    FieldExpression |
+    SelectArgs "," FieldExpression
 }
 
 SpansetExpression {
