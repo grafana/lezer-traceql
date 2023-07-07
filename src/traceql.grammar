@@ -1,7 +1,8 @@
 
 @top TraceQL {
     SpansetPipeline |
-    SpansetPipelineExpression
+    SpansetPipelineExpression |
+    ScalarPipelineExpressionFilter
 }
 
 @precedence {
@@ -58,17 +59,13 @@ SelectArgs {
 }
 
 SpansetExpression {
-    WrappedSpansetExpression |
+    "(" SpansetExpression !close_paren ")" |
     SpansetExpression !and and SpansetExpression |
     SpansetExpression !gt gt SpansetExpression |
     SpansetExpression !desc desc SpansetExpression |
     SpansetExpression !or or SpansetExpression |
     SpansetExpression !tilde tilde SpansetExpression |
     SpansetFilter
-}
-
-WrappedSpansetExpression {
-    "(" SpansetExpression !close_paren ")"
 }
 
 SpansetFilter {
@@ -78,6 +75,24 @@ SpansetFilter {
 
 ScalarFilter {
     ScalarExpression !comparisonOp ComparisonOp ScalarExpression
+}
+
+ScalarPipelineExpressionFilter {
+    ScalarPipelineExpression !comparisonOp ComparisonOp (ScalarPipelineExpression | Static)
+}
+
+ScalarPipelineExpression {
+    "(" ScalarPipelineExpression !close_paren ")" |
+    ScalarPipelineExpression !scalarOp ScalarOp ScalarPipelineExpression |
+    WrappedScalarPipeline
+}
+
+WrappedScalarPipeline {
+    "(" ScalarPipeline ")"
+}
+
+ScalarPipeline {
+    SpansetPipeline "PIPE" Aggregate
 }
 
 ScalarExpression {
