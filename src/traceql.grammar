@@ -13,6 +13,7 @@
     fieldOp @left
     comparisonOp @left
     scalarOp @left
+    pipe @left
     prefix
     close_paren
 }
@@ -35,11 +36,16 @@ SpansetPipeline {
     SpansetExpression |
     ScalarFilter |
     GroupOperation |
-    SelectOperation
+    SelectOperation |
+    SpansetPipeline !pipe pipe ( SpansetExpression | ScalarFilter | GroupOperation | CoalesceOperation | SelectOperation )
 }
 
 GroupOperation {
     "by" "(" FieldExpression ")"
+}
+
+CoalesceOperation {
+    "coalesce" "()"
 }
 
 SelectOperation {
@@ -159,9 +165,10 @@ AttributeField {
     gt { ">" }
     desc { ">>" }
     tilde { "~" }
+    pipe { "|" }
     ComparisonOp { "=" | "!=" | "<" | "<=" | ">" | ">=" }
     ScalarOp {"+" | "-" | "*" | "/" | "%" | "^"  }
-    FieldOp {  ComparisonOp | ScalarOp | "~" | "!~" }
+    FieldOp {  ComparisonOp | ScalarOp | tilde | "!~" }
 
     Parent { "parent" }
     Resource { "resource" }
