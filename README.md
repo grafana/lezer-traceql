@@ -1,6 +1,6 @@
 # lezer-traceql
 
-TraceQL lezer grammar based on https://github.com/grafana/loki/blob/main/pkg/traceql/syntax/expr.y.
+TraceQL lezer grammar based on https://github.com/grafana/tempo/blob/main/pkg/traceql/expr.y.
 
 ## Installation
 
