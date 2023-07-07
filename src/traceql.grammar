@@ -11,6 +11,8 @@
     desc @left
     tilde @left
     fieldOp @left
+    comparisonOp @left
+    scalarOp @left
     prefix
     close_paren
 }
@@ -30,7 +32,8 @@ WrappedSpansetPipeline {
 }
 
 SpansetPipeline {
-    SpansetExpression
+    SpansetExpression |
+    ScalarFilter
 }
 
 SpansetExpression {
@@ -51,6 +54,29 @@ SpansetFilter {
     "{" "}" |
     "{" FieldExpression "}"
 }
+
+ScalarFilter {
+    ScalarExpression !comparisonOp ComparisonOp ScalarExpression
+}
+
+ScalarExpression {
+    "(" ScalarExpression !close_paren ")" |
+    ScalarExpression !scalarOp ScalarOp ScalarExpression |
+    Aggregate |
+    Integer |
+    Float |
+    Duration |
+    !prefix "-" Integer |
+    !prefix "-" Float |
+    !prefix "-" Duration
+}
+
+Aggregate {
+    "count()" |
+    AggregateExpression "(" FieldExpression ")"
+}
+
+AggregateExpression { "max" | "min" | "avg" | "sum" }
 
 FieldExpression {
     "(" FieldExpression ")" |
@@ -118,7 +144,9 @@ AttributeField {
     gt { ">" }
     desc { ">>" }
     tilde { "~" }
-    FieldOp { "+" | "-" | "*" | "/" | "%" | "==" | "!=" | "<" | "<=" | ">" | ">=" | "~" | "!~" | "^" }
+    ComparisonOp { "=" | "!=" | "<" | "<=" | ">" | ">=" }
+    ScalarOp {"+" | "-" | "*" | "/" | "%" | "^"  }
+    FieldOp {  ComparisonOp | ScalarOp | "~" | "!~" }
 
     Parent { "parent" }
     Resource { "resource" }
