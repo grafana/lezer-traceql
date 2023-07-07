@@ -6,25 +6,25 @@
 }
 
 @precedence {
-    and @left
-    or @left
-    gt @left
-    desc @left
+    And @left
+    Or @left
+    Gt @left
+    Desc @left
     tilde @left
     fieldOp @left
     comparisonOp @left
     scalarOp @left
-    pipe @left
+    Pipe @left
     prefix
     close_paren
 }
 
 SpansetPipelineExpression {
     "(" SpansetPipelineExpression !close_paren ")" |
-    SpansetPipelineExpression !and and SpansetPipelineExpression |
-    SpansetPipelineExpression !gt gt SpansetPipelineExpression |
-    SpansetPipelineExpression !desc desc SpansetPipelineExpression |
-    SpansetPipelineExpression !or or SpansetPipelineExpression |
+    SpansetPipelineExpression !And And SpansetPipelineExpression |
+    SpansetPipelineExpression !Gt Gt SpansetPipelineExpression |
+    SpansetPipelineExpression !Desc Desc SpansetPipelineExpression |
+    SpansetPipelineExpression !Or Or SpansetPipelineExpression |
     SpansetPipelineExpression !tilde tilde SpansetPipelineExpression |
     WrappedSpansetPipeline
 }
@@ -38,7 +38,7 @@ SpansetPipeline {
     ScalarFilter |
     GroupOperation |
     SelectOperation |
-    SpansetPipeline !pipe pipe ( SpansetExpression | ScalarFilter | GroupOperation | CoalesceOperation | SelectOperation )
+    SpansetPipeline !Pipe Pipe ( SpansetExpression | ScalarFilter | GroupOperation | CoalesceOperation | SelectOperation )
 }
 
 GroupOperation {
@@ -60,10 +60,10 @@ SelectArgs {
 
 SpansetExpression {
     "(" SpansetExpression !close_paren ")" |
-    SpansetExpression !and and SpansetExpression |
-    SpansetExpression !gt gt SpansetExpression |
-    SpansetExpression !desc desc SpansetExpression |
-    SpansetExpression !or or SpansetExpression |
+    SpansetExpression !And And SpansetExpression |
+    SpansetExpression !Gt Gt SpansetExpression |
+    SpansetExpression !Desc Desc SpansetExpression |
+    SpansetExpression !Or Or SpansetExpression |
     SpansetExpression !tilde tilde SpansetExpression |
     SpansetFilter
 }
@@ -92,7 +92,7 @@ WrappedScalarPipeline {
 }
 
 ScalarPipeline {
-    SpansetPipeline "PIPE" Aggregate
+    SpansetPipeline !Pipe Pipe Aggregate
 }
 
 ScalarExpression {
@@ -117,8 +117,8 @@ AggregateExpression { "max" | "min" | "avg" | "sum" }
 FieldExpression {
     "(" FieldExpression ")" |
     FieldExpression !fieldOp FieldOp FieldExpression |
-    FieldExpression !and "&&" FieldExpression |
-    FieldExpression !or "||" FieldExpression |
+    FieldExpression !And And FieldExpression |
+    FieldExpression !Or Or FieldExpression |
     !prefix "-" FieldExpression |
     !prefix "!" FieldExpression |
     Static |
@@ -177,12 +177,12 @@ AttributeField {
     @precedence { Float, Duration, Integer }
 
     Identifier { $[a-zA-Z_.]$[a-zA-Z0-9_.]* }
-    and { "&&" }
-    or { "||" }
-    gt { ">" }
-    desc { ">>" }
+    And { "&&" }
+    Or { "||" }
+    Gt { ">" }
+    Desc { ">>" }
     tilde { "~" }
-    pipe { "|" }
+    Pipe { "|" }
     ComparisonOp { "=" | "!=" | "<" | "<=" | ">" | ">=" | "=~" | "!~" }
     ScalarOp {"+" | "-" | "*" | "/" | "%" | "^"  }
     FieldOp {  ComparisonOp | ScalarOp | tilde}
