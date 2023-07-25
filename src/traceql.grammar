@@ -35,6 +35,7 @@ WrappedSpansetPipeline {
 
 SpansetPipeline {
     SpansetExpression |
+    SpansetFilter |
     ScalarFilter |
     GroupOperation |
     SelectOperation |
@@ -64,8 +65,7 @@ SpansetExpression {
     SpansetExpression !Gt Gt SpansetExpression |
     SpansetExpression !Desc Desc SpansetExpression |
     SpansetExpression !Or Or SpansetExpression |
-    SpansetExpression !tilde tilde SpansetExpression |
-    SpansetFilter
+    SpansetExpression !tilde tilde SpansetExpression
 }
 
 SpansetFilter {
