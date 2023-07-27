@@ -161,7 +161,7 @@ TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeF
 # { !("test" != .c || ((true && .b) || 3 < .a)) }
 { !("test" != .c || ((true && .b) || 3 < .a)) }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(FieldExpression(FieldExpression(Static(String)), FieldOp, FieldExpression(FieldExpression(AttributeField(Identifier)), Or, FieldExpression(FieldExpression(FieldExpression(FieldExpression(FieldExpression(FieldExpression(Static), And, FieldExpression(AttributeField(Identifier)))), Or, FieldExpression(Static(Integer))), FieldOp, FieldExpression(AttributeField(Identifier)))))))))))
+TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(FieldExpression(FieldExpression(FieldExpression(Static(String)), FieldOp, FieldExpression(AttributeField(Identifier))), Or, FieldExpression(FieldExpression(FieldExpression(FieldExpression(FieldExpression(Static), And, FieldExpression(AttributeField(Identifier)))), Or, FieldExpression(FieldExpression(Static(Integer)), FieldOp, FieldExpression(AttributeField(Identifier)))))))))))
 
 # { status = ok }
 { status = ok }
