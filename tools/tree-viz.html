@@ -8,7 +8,7 @@
     <script type="importmap">
       {
         "imports": {
-          "@grafana/lezer-traceql": "https://cdn.jsdelivr.net/npm/@grafana/lezer-traceql@latest/index.es.js",
+          "@grafana/lezer-traceql": "../dist",
           "@lezer/lr": "https://cdn.jsdelivr.net/npm/@lezer/lr@1.0.0/dist/index.js",
           "@lezer/common": "https://cdn.jsdelivr.net/npm/@lezer/common@1.0.0/dist/index.js"
         }
@@ -23,7 +23,7 @@
     </style>
   </head>
   <body>
-    <textarea style="width: 100%; resize: vertical" id="in" type="text">count_over_time({level="info"}[10s])</textarea>
+    <textarea style="width: 100%; resize: vertical" id="in" type="text">{ span.foo = 5 }</textarea>
     <div id="cursor-pos"></div>
     <div id="out"></div>
     <script type="module">
