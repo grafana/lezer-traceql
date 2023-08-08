@@ -26,7 +26,8 @@ SpansetPipelineExpression {
     SpansetPipelineExpression !Desc Desc SpansetPipelineExpression |
     SpansetPipelineExpression !Or Or SpansetPipelineExpression |
     SpansetPipelineExpression !tilde tilde SpansetPipelineExpression |
-    WrappedSpansetPipeline
+    WrappedSpansetPipeline |
+    SpansetPipeline
 }
 
 WrappedSpansetPipeline {

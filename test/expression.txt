@@ -1,382 +1,382 @@
 # { true }
 { true }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(Static))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static)))))
 
 # { !true }
 { !true }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(Static)))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(Static))))))
 
 # { true && false }
 { true && false }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(Static), And, FieldExpression(Static)))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(Static), And, FieldExpression(Static))))))
 
 # { true || false }
 { true || false }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(Static), Or, FieldExpression(Static)))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(Static), Or, FieldExpression(Static))))))
 
 # { 1 = 2 }
 { 1 = 2 }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(Static(Integer)), FieldOp, FieldExpression(Static(Integer))))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(Static(Integer)), FieldOp, FieldExpression(Static(Integer)))))))
 
 # { 1 != 2 }
 { 1 != 2 }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(Static(Integer)), FieldOp, FieldExpression(Static(Integer))))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(Static(Integer)), FieldOp, FieldExpression(Static(Integer)))))))
 
 # { 1 > 2 }
 { 1 > 2 }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(Static(Integer)), FieldOp, FieldExpression(Static(Integer))))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(Static(Integer)), FieldOp, FieldExpression(Static(Integer)))))))
 
 # { 1 >= 2 }
 { 1 >= 2 }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(Static(Integer)), FieldOp, FieldExpression(Static(Integer))))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(Static(Integer)), FieldOp, FieldExpression(Static(Integer)))))))
 
 # { 1 < 2 }
 { 1 < 2 }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(Static(Integer)), FieldOp, FieldExpression(Static(Integer))))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(Static(Integer)), FieldOp, FieldExpression(Static(Integer)))))))
 
 # { 1 <= 2 }
 { 1 <= 2 }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(Static(Integer)), FieldOp, FieldExpression(Static(Integer))))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(Static(Integer)), FieldOp, FieldExpression(Static(Integer)))))))
 
 # { -1 = 2 }
 { -1 = 2 }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(FieldExpression(Static(Integer)), FieldOp, FieldExpression(Static(Integer)))))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(FieldExpression(Static(Integer)), FieldOp, FieldExpression(Static(Integer))))))))
 
 # { "test" =~ "test" }
 { "test" =~ "test" }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(Static(String)), FieldOp, FieldExpression(Static(String))))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(Static(String)), FieldOp, FieldExpression(Static(String)))))))
 
 # { "test" !~ "test" }
 { "test" !~ "test" }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(Static(String)), FieldOp, FieldExpression(Static(String))))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(Static(String)), FieldOp, FieldExpression(Static(String)))))))
 
 # { "test" = "test" }
 { "test" = "test" }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(Static(String)), FieldOp, FieldExpression(Static(String))))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(Static(String)), FieldOp, FieldExpression(Static(String)))))))
 
 # { "test" != "test" }
 { "test" != "test" }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(Static(String)), FieldOp, FieldExpression(Static(String))))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(Static(String)), FieldOp, FieldExpression(Static(String)))))))
 
 # { .a }
 { .a }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(AttributeField(Identifier)))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(AttributeField(Identifier))))))
 
 # { !.a }
 { !.a }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Identifier))))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Identifier)))))))
 
 # { .a && false }
 { .a && false }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Identifier)), And, FieldExpression(Static)))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Identifier)), And, FieldExpression(Static))))))
 
 # { .a || true }
 { .a || true }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Identifier)), Or, FieldExpression(Static)))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Identifier)), Or, FieldExpression(Static))))))
 
 # { .a = 2 }
 { .a = 2 }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Identifier)), FieldOp, FieldExpression(Static(Integer))))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Identifier)), FieldOp, FieldExpression(Static(Integer)))))))
 
 # { .a != 2 }
 { .a != 2 }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Identifier)), FieldOp, FieldExpression(Static(Integer))))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Identifier)), FieldOp, FieldExpression(Static(Integer)))))))
 
 # { .a > 2 }
 { .a > 2 }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Identifier)), FieldOp, FieldExpression(Static(Integer))))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Identifier)), FieldOp, FieldExpression(Static(Integer)))))))
 
 # { .a >= 2 }
 { .a >= 2 }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Identifier)), FieldOp, FieldExpression(Static(Integer))))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Identifier)), FieldOp, FieldExpression(Static(Integer)))))))
 
 # { .a < 2 }
 { .a < 2 }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Identifier)), FieldOp, FieldExpression(Static(Integer))))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Identifier)), FieldOp, FieldExpression(Static(Integer)))))))
 
 # { .a <= 2 }
 { .a <= 2 }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Identifier)), FieldOp, FieldExpression(Static(Integer))))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Identifier)), FieldOp, FieldExpression(Static(Integer)))))))
 
 # { -.a = 2 }
 { -.a = 2 }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(FieldExpression(AttributeField(Identifier)), FieldOp, FieldExpression(Static(Integer)))))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(FieldExpression(AttributeField(Identifier)), FieldOp, FieldExpression(Static(Integer))))))))
 
 # { .a =~ "test" }
 { .a =~ "test" }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Identifier)), FieldOp, FieldExpression(Static(String))))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Identifier)), FieldOp, FieldExpression(Static(String)))))))
 
 # { .a !~ "test" }
 { .a !~ "test" }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Identifier)), FieldOp, FieldExpression(Static(String))))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Identifier)), FieldOp, FieldExpression(Static(String)))))))
 
 # { .a = "test" }
 { .a = "test" }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Identifier)), FieldOp, FieldExpression(Static(String))))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Identifier)), FieldOp, FieldExpression(Static(String)))))))
 
 # { .a != "test" }
 { .a != "test" }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Identifier)), FieldOp, FieldExpression(Static(String))))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Identifier)), FieldOp, FieldExpression(Static(String)))))))
 
 # { resource.a != 3 }
 { resource.a != 3 }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Resource, Identifier)), FieldOp, FieldExpression(Static(Integer))))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Resource, Identifier)), FieldOp, FieldExpression(Static(Integer)))))))
 
 # { span.a != 3 }
 { span.a != 3 }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Span, Identifier)), FieldOp, FieldExpression(Static(Integer))))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Span, Identifier)), FieldOp, FieldExpression(Static(Integer)))))))
 
 # { !("test" != .c || ((true && .b) || 3 < .a)) }
 { !("test" != .c || ((true && .b) || 3 < .a)) }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(FieldExpression(FieldExpression(FieldExpression(Static(String)), FieldOp, FieldExpression(AttributeField(Identifier))), Or, FieldExpression(FieldExpression(FieldExpression(FieldExpression(FieldExpression(Static), And, FieldExpression(AttributeField(Identifier)))), Or, FieldExpression(FieldExpression(Static(Integer)), FieldOp, FieldExpression(AttributeField(Identifier)))))))))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(FieldExpression(FieldExpression(FieldExpression(Static(String)), FieldOp, FieldExpression(AttributeField(Identifier))), Or, FieldExpression(FieldExpression(FieldExpression(FieldExpression(FieldExpression(Static), And, FieldExpression(AttributeField(Identifier)))), Or, FieldExpression(FieldExpression(Static(Integer)), FieldOp, FieldExpression(AttributeField(Identifier))))))))))))
 
 # { status = ok }
 { status = ok }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(IntrinsicField), FieldOp, FieldExpression(Static)))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(IntrinsicField), FieldOp, FieldExpression(Static))))))
 
 # { status = unset }
 { status = unset }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(IntrinsicField), FieldOp, FieldExpression(Static)))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(IntrinsicField), FieldOp, FieldExpression(Static))))))
 
 # { status = error }
 { status = error }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(IntrinsicField), FieldOp, FieldExpression(Static)))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(IntrinsicField), FieldOp, FieldExpression(Static))))))
 
 # { status != error }
 { status != error }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(IntrinsicField), FieldOp, FieldExpression(Static)))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(IntrinsicField), FieldOp, FieldExpression(Static))))))
 
 # { kind = internal }
 { kind = internal }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(IntrinsicField), FieldOp, FieldExpression(Static)))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(IntrinsicField), FieldOp, FieldExpression(Static))))))
 
 # { kind = client }
 { kind = client }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(IntrinsicField), FieldOp, FieldExpression(Static)))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(IntrinsicField), FieldOp, FieldExpression(Static))))))
 
 # { kind = consumer }
 { kind = consumer }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(IntrinsicField), FieldOp, FieldExpression(Static)))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(IntrinsicField), FieldOp, FieldExpression(Static))))))
 
 # { traceDuration > 1s }
 { traceDuration > 1s }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(IntrinsicField), FieldOp, FieldExpression(Static(Duration))))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(IntrinsicField), FieldOp, FieldExpression(Static(Duration)))))))
 
 # { rootServiceName = "foo" }
 { rootServiceName = "foo" }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(IntrinsicField), FieldOp, FieldExpression(Static(String))))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(IntrinsicField), FieldOp, FieldExpression(Static(String)))))))
 
 # { rootName != "foo" }
 { rootName != "foo" }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(IntrinsicField), FieldOp, FieldExpression(Static(String))))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(IntrinsicField), FieldOp, FieldExpression(Static(String)))))))
 
 # { duration > 1s }
 { duration > 1s }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(IntrinsicField), FieldOp, FieldExpression(Static(Duration))))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(IntrinsicField), FieldOp, FieldExpression(Static(Duration)))))))
 
 # { 1 < 1h }
 { 1 < 1h }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(Static(Integer)), FieldOp, FieldExpression(Static(Duration))))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(Static(Integer)), FieldOp, FieldExpression(Static(Duration)))))))
 
 # { 1 <= 1.1 }
 { 1 <= 1.1 }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(Static(Integer)), FieldOp, FieldExpression(Static(Float))))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(Static(Integer)), FieldOp, FieldExpression(Static(Float)))))))
 
 # { 1 + 1 = 2 }
 { 1 + 1 = 2 }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(FieldExpression(Static(Integer)), FieldOp, FieldExpression(Static(Integer))), FieldOp, FieldExpression(Static(Integer))))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(FieldExpression(Static(Integer)), FieldOp, FieldExpression(Static(Integer))), FieldOp, FieldExpression(Static(Integer)))))))
 
 # { 1 - 1 = 2 }
 { 1 - 1 = 2 }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(FieldExpression(Static(Integer)), FieldOp, FieldExpression(Static(Integer))), FieldOp, FieldExpression(Static(Integer))))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(FieldExpression(Static(Integer)), FieldOp, FieldExpression(Static(Integer))), FieldOp, FieldExpression(Static(Integer)))))))
 
 # { 1 * 1 = 2 }
 { 1 * 1 = 2 }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(FieldExpression(Static(Integer)), FieldOp, FieldExpression(Static(Integer))), FieldOp, FieldExpression(Static(Integer))))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(FieldExpression(Static(Integer)), FieldOp, FieldExpression(Static(Integer))), FieldOp, FieldExpression(Static(Integer)))))))
 
 # { 1 / 1 = 2 }
 { 1 / 1 = 2 }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(FieldExpression(Static(Integer)), FieldOp, FieldExpression(Static(Integer))), FieldOp, FieldExpression(Static(Integer))))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(FieldExpression(Static(Integer)), FieldOp, FieldExpression(Static(Integer))), FieldOp, FieldExpression(Static(Integer)))))))
 
 # { 1 ^ 1 = 2 }
 { 1 ^ 1 = 2 }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(FieldExpression(Static(Integer)), FieldOp, FieldExpression(Static(Integer))), FieldOp, FieldExpression(Static(Integer))))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(FieldExpression(Static(Integer)), FieldOp, FieldExpression(Static(Integer))), FieldOp, FieldExpression(Static(Integer)))))))
 
 # { .a + 1 = 2 }
 { .a + 1 = 2 }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(FieldExpression(AttributeField(Identifier)), FieldOp, FieldExpression(Static(Integer))), FieldOp, FieldExpression(Static(Integer))))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(FieldExpression(AttributeField(Identifier)), FieldOp, FieldExpression(Static(Integer))), FieldOp, FieldExpression(Static(Integer)))))))
 
 # { .a - 1 = 2 }
 { .a - 1 = 2 }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(FieldExpression(AttributeField(Identifier)), FieldOp, FieldExpression(Static(Integer))), FieldOp, FieldExpression(Static(Integer))))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(FieldExpression(AttributeField(Identifier)), FieldOp, FieldExpression(Static(Integer))), FieldOp, FieldExpression(Static(Integer)))))))
 
 # { .a * 1 = 2 }
 { .a * 1 = 2 }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(FieldExpression(AttributeField(Identifier)), FieldOp, FieldExpression(Static(Integer))), FieldOp, FieldExpression(Static(Integer))))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(FieldExpression(AttributeField(Identifier)), FieldOp, FieldExpression(Static(Integer))), FieldOp, FieldExpression(Static(Integer)))))))
 
 # { .a / 1 = 2 }
 { .a / 1 = 2 }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(FieldExpression(AttributeField(Identifier)), FieldOp, FieldExpression(Static(Integer))), FieldOp, FieldExpression(Static(Integer))))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(FieldExpression(AttributeField(Identifier)), FieldOp, FieldExpression(Static(Integer))), FieldOp, FieldExpression(Static(Integer)))))))
 
 # { .a ^ 1 = 2 }
 { .a ^ 1 = 2 }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(FieldExpression(AttributeField(Identifier)), FieldOp, FieldExpression(Static(Integer))), FieldOp, FieldExpression(Static(Integer))))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(FieldExpression(AttributeField(Identifier)), FieldOp, FieldExpression(Static(Integer))), FieldOp, FieldExpression(Static(Integer)))))))
 
 # { duration > 1s * 2s }
 { duration > 1s * 2s }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(FieldExpression(IntrinsicField), FieldOp, FieldExpression(Static(Duration))), FieldOp, FieldExpression(Static(Duration))))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(FieldExpression(IntrinsicField), FieldOp, FieldExpression(Static(Duration))), FieldOp, FieldExpression(Static(Duration)))))))
 
 # { 1 * 1h = 1 }
 { 1 * 1h = 1 }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(FieldExpression(Static(Integer)), FieldOp, FieldExpression(Static(Duration))), FieldOp, FieldExpression(Static(Integer))))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(FieldExpression(Static(Integer)), FieldOp, FieldExpression(Static(Duration))), FieldOp, FieldExpression(Static(Integer)))))))
 
 # { 1 / 1.1 = 1 }
 { 1 / 1.1 = 1 }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(FieldExpression(Static(Integer)), FieldOp, FieldExpression(Static(Float))), FieldOp, FieldExpression(Static(Integer))))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(FieldExpression(Static(Integer)), FieldOp, FieldExpression(Static(Float))), FieldOp, FieldExpression(Static(Integer)))))))
 
 # { .http.status >= "200" }
 { .http.status >= "200" }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Identifier)), FieldOp, FieldExpression(Static(String))))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Identifier)), FieldOp, FieldExpression(Static(String)))))))
 
 # { true } && { true }
 { true } && { true }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(Static))), ⚠(And), ⚠, ⚠, ⚠)
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static)))), And, SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static))))))
 
 # { true } || { true }
 { true } || { true }
 ==>
-TraceQL(SpansetPipeline(SpansetFilter(FieldExpression(Static))), ⚠(Or), ⚠, ⚠, ⚠)
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static)))), Or, SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static))))))
 
 # avg(.field) > 1
 avg(.field) > 1
 ==>
-TraceQL(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(AttributeField(Identifier)))), ComparisonOp, ScalarExpression(Integer))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(AttributeField(Identifier)))), ComparisonOp, ScalarExpression(Integer)))))
 
 # max(duration) >= 1s
 max(duration) >= 1s
 ==>
-TraceQL(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(IntrinsicField))), ComparisonOp, ScalarExpression(Duration))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(IntrinsicField))), ComparisonOp, ScalarExpression(Duration)))))
 
 # max(duration) > 1
 max(duration) > 1
 ==>
-TraceQL(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(IntrinsicField))), ComparisonOp, ScalarExpression(Integer))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(IntrinsicField))), ComparisonOp, ScalarExpression(Integer)))))
 
 # { true } | max(duration) = 1h
 { true } | max(duration) = 1h
 ==>
-TraceQL(SpansetPipeline(SpansetPipeline(SpansetFilter(FieldExpression(Static))), Pipe, ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(IntrinsicField))), ComparisonOp, ScalarExpression(Duration))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetPipeline(SpansetFilter(FieldExpression(Static))), Pipe, ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(IntrinsicField))), ComparisonOp, ScalarExpression(Duration)))))
 
 # { true } | min(duration) = 1h
 { true } | min(duration) = 1h
 ==>
-TraceQL(SpansetPipeline(SpansetPipeline(SpansetFilter(FieldExpression(Static))), Pipe, ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(IntrinsicField))), ComparisonOp, ScalarExpression(Duration))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetPipeline(SpansetFilter(FieldExpression(Static))), Pipe, ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(IntrinsicField))), ComparisonOp, ScalarExpression(Duration)))))
 
 # { true } | sum(duration) = 1h
 { true } | sum(duration) = 1h
 ==>
-TraceQL(SpansetPipeline(SpansetPipeline(SpansetFilter(FieldExpression(Static))), Pipe, ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(IntrinsicField))), ComparisonOp, ScalarExpression(Duration))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetPipeline(SpansetFilter(FieldExpression(Static))), Pipe, ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(IntrinsicField))), ComparisonOp, ScalarExpression(Duration)))))
 
 # { true } | max(.a) = 1
 { true } | max(.a) = 1
 ==>
-TraceQL(SpansetPipeline(SpansetPipeline(SpansetFilter(FieldExpression(Static))), Pipe, ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(AttributeField(Identifier)))), ComparisonOp, ScalarExpression(Integer))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetPipeline(SpansetFilter(FieldExpression(Static))), Pipe, ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(AttributeField(Identifier)))), ComparisonOp, ScalarExpression(Integer)))))
 
 # { true } | max(span.a) = 1
 { true } | max(span.a) = 1
 ==>
-TraceQL(SpansetPipeline(SpansetPipeline(SpansetFilter(FieldExpression(Static))), Pipe, ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(AttributeField(Span, Identifier)))), ComparisonOp, ScalarExpression(Integer))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetPipeline(SpansetFilter(FieldExpression(Static))), Pipe, ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(AttributeField(Span, Identifier)))), ComparisonOp, ScalarExpression(Integer)))))
 
 # { true } | max(resource.a) = 1
 { true } | max(resource.a) = 1
 ==>
-TraceQL(SpansetPipeline(SpansetPipeline(SpansetFilter(FieldExpression(Static))), Pipe, ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(AttributeField(Resource, Identifier)))), ComparisonOp, ScalarExpression(Integer))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetPipeline(SpansetFilter(FieldExpression(Static))), Pipe, ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(AttributeField(Resource, Identifier)))), ComparisonOp, ScalarExpression(Integer)))))
 
 # { true } | max(1 + .a) = 1
 { true } | max(1 + .a) = 1
 ==>
-TraceQL(SpansetPipeline(SpansetPipeline(SpansetFilter(FieldExpression(Static))), Pipe, ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(FieldExpression(Static(Integer)), FieldOp, FieldExpression(AttributeField(Identifier))))), ComparisonOp, ScalarExpression(Integer))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetPipeline(SpansetFilter(FieldExpression(Static))), Pipe, ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(FieldExpression(Static(Integer)), FieldOp, FieldExpression(AttributeField(Identifier))))), ComparisonOp, ScalarExpression(Integer)))))
 
 # { true } | max((1 + .a) * 2) = 1
 { true } | max((1 + .a) * 2) = 1
 ==>
-TraceQL(SpansetPipeline(SpansetPipeline(SpansetFilter(FieldExpression(Static))), Pipe, ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(FieldExpression(FieldExpression(FieldExpression(Static(Integer)), FieldOp, FieldExpression(AttributeField(Identifier)))), FieldOp, FieldExpression(Static(Integer))))), ComparisonOp, ScalarExpression(Integer))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetPipeline(SpansetFilter(FieldExpression(Static))), Pipe, ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(FieldExpression(FieldExpression(FieldExpression(Static(Integer)), FieldOp, FieldExpression(AttributeField(Identifier)))), FieldOp, FieldExpression(Static(Integer))))), ComparisonOp, ScalarExpression(Integer)))))
 
 # max(duration) > 3s | { status = error || .http.status = 500 }
 max(duration) > 3s | { status = error || .http.status = 500 }
 ==>
-TraceQL(SpansetPipeline(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(IntrinsicField))), ComparisonOp, ScalarExpression(Duration))), Pipe, ⚠, ⚠, ⚠, ⚠, ⚠(Or), ⚠, ⚠, ScalarFilter(ScalarExpression(Integer), ⚠)))
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(IntrinsicField))), ComparisonOp, ScalarExpression(Duration))), Pipe, ⚠, ⚠, ⚠, ⚠)), Or, SpansetPipelineExpression(SpansetPipeline(SpansetFilter(⚠, FieldExpression(FieldExpression(AttributeField(Identifier)), FieldOp, FieldExpression(Static(Integer))))))))
 
 # select(.a)
 select(.a)
 ==>
-TraceQL(SpansetPipeline(SelectOperation(SelectArgs(FieldExpression(AttributeField(Identifier))))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SelectOperation(SelectArgs(FieldExpression(AttributeField(Identifier)))))))
 
 # {} | select(.a,.b,.c)
 {} | select(.a,.b,.c)
 ==>
-TraceQL(SpansetPipeline(SpansetPipeline(SpansetFilter), Pipe, SelectOperation(SelectArgs(SelectArgs(SelectArgs(FieldExpression(AttributeField(Identifier))), FieldExpression(AttributeField(Identifier))), FieldExpression(AttributeField(Identifier))))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetPipeline(SpansetFilter), Pipe, SelectOperation(SelectArgs(SelectArgs(SelectArgs(FieldExpression(AttributeField(Identifier))), FieldExpression(AttributeField(Identifier))), FieldExpression(AttributeField(Identifier)))))))
 
 # { true } | { .a }
 { true } | { .a }
@@ -386,12 +386,12 @@ TraceQL(SpansetPipeline(SpansetPipeline(SpansetFilter(FieldExpression(Static))),
 # { true } | count() = 1
 { true } | count() = 1
 ==>
-TraceQL(SpansetPipeline(SpansetPipeline(SpansetFilter(FieldExpression(Static))), Pipe, ScalarFilter(ScalarExpression(Aggregate), ComparisonOp, ScalarExpression(Integer))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetPipeline(SpansetFilter(FieldExpression(Static))), Pipe, ScalarFilter(ScalarExpression(Aggregate), ComparisonOp, ScalarExpression(Integer)))))
 
 # { true } | avg(duration) = 1h
 { true } | avg(duration) = 1h
 ==>
-TraceQL(SpansetPipeline(SpansetPipeline(SpansetFilter(FieldExpression(Static))), Pipe, ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(IntrinsicField))), ComparisonOp, ScalarExpression(Duration))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetPipeline(SpansetFilter(FieldExpression(Static))), Pipe, ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(IntrinsicField))), ComparisonOp, ScalarExpression(Duration)))))
 
 # count() = 1 | { true }
 count() = 1 | { true }
@@ -416,22 +416,22 @@ TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(WrappedSpansetPipeli
 # { true } | coalesce()
 { true } | coalesce()
 ==>
-TraceQL(SpansetPipeline(SpansetPipeline(SpansetFilter(FieldExpression(Static))), Pipe, CoalesceOperation))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetPipeline(SpansetFilter(FieldExpression(Static))), Pipe, CoalesceOperation)))
 
 # { true } | by(1 + .a) | coalesce()
 { true } | by(1 + .a) | coalesce()
 ==>
-TraceQL(SpansetPipeline(SpansetPipeline(SpansetPipeline(SpansetFilter(FieldExpression(Static))), Pipe, GroupOperation(FieldExpression(FieldExpression(Static(Integer)), FieldOp, FieldExpression(AttributeField(Identifier))))), Pipe, CoalesceOperation))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetPipeline(SpansetPipeline(SpansetFilter(FieldExpression(Static))), Pipe, GroupOperation(FieldExpression(FieldExpression(Static(Integer)), FieldOp, FieldExpression(AttributeField(Identifier))))), Pipe, CoalesceOperation)))
 
 # { true } | by(.a)
 { true } | by(.a)
 ==>
-TraceQL(SpansetPipeline(SpansetPipeline(SpansetFilter(FieldExpression(Static))), Pipe, GroupOperation(FieldExpression(AttributeField(Identifier)))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetPipeline(SpansetFilter(FieldExpression(Static))), Pipe, GroupOperation(FieldExpression(AttributeField(Identifier))))))
 
 # { true } | by(1 + .a)
 { true } | by(1 + .a)
 ==>
-TraceQL(SpansetPipeline(SpansetPipeline(SpansetFilter(FieldExpression(Static))), Pipe, GroupOperation(FieldExpression(FieldExpression(Static(Integer)), FieldOp, FieldExpression(AttributeField(Identifier))))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetPipeline(SpansetFilter(FieldExpression(Static))), Pipe, GroupOperation(FieldExpression(FieldExpression(Static(Integer)), FieldOp, FieldExpression(AttributeField(Identifier)))))))
 
 # by(.a) | { true }
 by(.a) | { true }
@@ -441,15 +441,15 @@ TraceQL(SpansetPipeline(SpansetPipeline(GroupOperation(FieldExpression(Attribute
 # { true } | by(name) | count() > 2
 { true } | by(name) | count() > 2
 ==>
-TraceQL(SpansetPipeline(SpansetPipeline(SpansetPipeline(SpansetFilter(FieldExpression(Static))), Pipe, GroupOperation(FieldExpression(IntrinsicField))), Pipe, ScalarFilter(ScalarExpression(Aggregate), ComparisonOp, ScalarExpression(Integer))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetPipeline(SpansetPipeline(SpansetFilter(FieldExpression(Static))), Pipe, GroupOperation(FieldExpression(IntrinsicField))), Pipe, ScalarFilter(ScalarExpression(Aggregate), ComparisonOp, ScalarExpression(Integer)))))
 
 # { true } | by(.field) | avg(.b) = 2
 { true } | by(.field) | avg(.b) = 2
 ==>
-TraceQL(SpansetPipeline(SpansetPipeline(SpansetPipeline(SpansetFilter(FieldExpression(Static))), Pipe, GroupOperation(FieldExpression(AttributeField(Identifier)))), Pipe, ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(AttributeField(Identifier)))), ComparisonOp, ScalarExpression(Integer))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetPipeline(SpansetPipeline(SpansetFilter(FieldExpression(Static))), Pipe, GroupOperation(FieldExpression(AttributeField(Identifier)))), Pipe, ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(AttributeField(Identifier)))), ComparisonOp, ScalarExpression(Integer)))))
 
 # { true } | by(3 * .field - 2) | max(duration) < 1s
 { true } | by(3 * .field - 2) | max(duration) < 1s
 ==>
-TraceQL(SpansetPipeline(SpansetPipeline(SpansetPipeline(SpansetFilter(FieldExpression(Static))), Pipe, GroupOperation(FieldExpression(FieldExpression(FieldExpression(Static(Integer)), FieldOp, FieldExpression(AttributeField(Identifier))), FieldOp, FieldExpression(Static(Integer))))), Pipe, ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(IntrinsicField))), ComparisonOp, ScalarExpression(Duration))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetPipeline(SpansetPipeline(SpansetFilter(FieldExpression(Static))), Pipe, GroupOperation(FieldExpression(FieldExpression(FieldExpression(Static(Integer)), FieldOp, FieldExpression(AttributeField(Identifier))), FieldOp, FieldExpression(Static(Integer))))), Pipe, ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(IntrinsicField))), ComparisonOp, ScalarExpression(Duration)))))
 
