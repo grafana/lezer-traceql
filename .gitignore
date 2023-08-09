@@ -1,7 +1,8 @@
-/.vscode
+.DS_STORE
+.tern-*
 /.idea
+/.vscode
+/dist/
 /node_modules/
 /src/parser.*
-.tern-*
-/dist/
 notes.txt
