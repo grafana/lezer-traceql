@@ -34,5 +34,5 @@ For instance, you can do that by opening a terminal at the root folder and runni
 ```bash
 npx http-server
 ```
-This should start a HTTP server at `http://127.0.0.1:8080`. You can now fetch the `tools/tree-viz.html` page from the HTTP server: open your browser and visit `http://localhost:8080/tools/tree-viz.html`.
+This should start a HTTP server at `http://127.0.0.1:8080`. You can now fetch the `tools/tree-viz.html` page from the HTTP server: open your browser and visit `http://127.0.0.1:8080/tools/tree-viz.html`.
 ![alt text](docs/tree-visualizer.png)
