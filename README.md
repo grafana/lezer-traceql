@@ -20,3 +20,19 @@ npm run build
 ```
 npm test
 ```
+
+### Tree visualizer
+
+You can use the `tree-viz` tool in the `tools` folder to visually see the parser in action.
+
+
+
+To use it, you need to have already [built the project](#building).
+Once built, you need to run an HTTP server.
+For instance, you can do that running, in the root folder:
+```bash
+npx http-server
+```
+This should start a HTTP server at `http://127.0.0.1:8080`. You can now fetch the `tools/tree-viz.html` page from the HTTP server: open your browser and visit `http://localhost:8080/tools/tree-viz.html`.
+
+![alt text](docs/tree-visualizer.png)
