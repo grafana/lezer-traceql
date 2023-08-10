@@ -2,6 +2,7 @@
 .tern-*
 /.idea
 /.vscode
+/dev/
 /dist/
 /node_modules/
 /src/parser.*

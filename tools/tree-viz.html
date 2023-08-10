@@ -70,9 +70,8 @@
               graphLines.push(getGraphLine(cur.node));
             }
 
-            const posCur = tree.cursor(pos);
-
-            const nodeText = getNodeText(tree.cursor(pos));
+            const posCur = tree.cursorAt(pos);
+            const nodeText = getNodeText(posCur);
 
             const graphText = `digraph {
               ${graphLines.join('\n')}
