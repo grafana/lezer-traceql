@@ -75,7 +75,7 @@
               graphLines.push(getGraphLine(cur.node));
             }
 
-            const posCur = tree.cursorAt(pos, 1);
+            const posCur = tree.cursorAt(pos, 1);  // select node corresponding to character on the right of the cursor
             const nodeText = getNodeText(posCur);
 
             // Plot tree:
