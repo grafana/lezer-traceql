@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="shortcut icon" href=/src/fav32.png type=image/x-icon>
     <script src="https://cdn.jsdelivr.net/npm/d3@6.7.0/dist/d3.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@hpcc-js/wasm@1.12.8/dist/index.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/d3-graphviz@4.1.0/build/d3-graphviz.min.js"></script>
@@ -56,6 +57,7 @@
           function render() {
             const text = inElem.value;
             const pos = inElem.selectionStart;
+            const errorNodeCursors = [];
 
             if (text === currentlyVisualizedText && pos === currentlyVisualizedPos) {
               // no changes
@@ -67,15 +69,23 @@
             const graphLines = [];
             graphLines.push(getGraphLine(cur.node));
             while (cur.next()) {
+              if (cur.node.type.isError) {
+                errorNodeCursors.push({...cur});
+              }
               graphLines.push(getGraphLine(cur.node));
             }
 
-            const posCur = tree.cursorAt(pos);
+            const posCur = tree.cursorAt(pos, 1);  // select node corresponding to character on the right of the cursor
             const nodeText = getNodeText(posCur);
 
+            // Plot tree:
+            // - plot nodes and arrows
+            // - fill selected node
+            // - show red text for error nodes, if any
             const graphText = `digraph {
               ${graphLines.join('\n')}
               ${nodeText} [style=filled]
+              ${(errorNodeCursors || []).map(e => `${getNodeText(e)} [fontcolor="#ff0000"]`).join('\n')}
             }`.trim();
 
             graphViz.renderDot(graphText);

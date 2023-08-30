@@ -186,7 +186,7 @@ AttributeField {
     Pipe { "|" }
     ComparisonOp { "=" | "!=" | "<" | "<=" | ">" | ">=" | "=~" | "!~" }
     ScalarOp {"+" | "-" | "*" | "/" | "%" | "^"  }
-    FieldOp {  ComparisonOp | ScalarOp | tilde}
+    FieldOp { ComparisonOp | ScalarOp | tilde }
 
     Parent { "parent" }
     Resource { "resource" }
