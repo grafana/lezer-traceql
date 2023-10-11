@@ -1,6 +1,6 @@
 {
   "name": "@grafana/lezer-traceql",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Grafana Tempo TraceQL lezer grammar",
   "main": "index.cjs",
   "type": "module",
