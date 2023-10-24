@@ -5,7 +5,9 @@
 
 @precedence {
     Gt @left
+    Lt @left
     Desc @left
+    Anc @left
     tilde @left
     fieldOp @left
     comparisonOp @left
@@ -13,6 +15,7 @@
     And @left
     Or @left
     Pipe @left
+    ExperimentalOp @left
     prefix
     close_paren
 }
@@ -22,9 +25,12 @@ SpansetPipelineExpression {
     SpansetPipelineExpression !And And SpansetPipelineExpression |
     SpansetPipelineExpression !Gt Gt SpansetPipelineExpression |
     SpansetPipelineExpression !Desc Desc SpansetPipelineExpression |
+    SpansetPipelineExpression !Lt Lt SpansetPipelineExpression |
+    SpansetPipelineExpression !Anc Anc SpansetPipelineExpression |
     SpansetPipelineExpression !Or Or SpansetPipelineExpression |
     SpansetPipelineExpression !tilde tilde SpansetPipelineExpression |
     SpansetPipelineExpression !Pipe Pipe SpansetPipelineExpression |
+    SpansetPipelineExpression !ExperimentalOp ExperimentalOp SpansetPipelineExpression |
     WrappedSpansetPipeline |
     SpansetPipeline
 }
@@ -63,7 +69,9 @@ SpansetExpression {
     "(" SpansetExpression !close_paren ")" |
     SpansetExpression !And And SpansetExpression |
     SpansetExpression !Gt Gt SpansetExpression |
+    SpansetExpression !Lt Lt SpansetExpression |
     SpansetExpression !Desc Desc SpansetExpression |
+    SpansetExpression !Anc Anc SpansetExpression |
     SpansetExpression !Or Or SpansetExpression |
     SpansetExpression !tilde tilde SpansetExpression
 }
@@ -172,10 +180,13 @@ AttributeField {
     And { "&&" }
     Or { "||" }
     Gt { ">" }
+    Lt { "<" }
     Desc { ">>" }
+    Anc { "<<" }
     tilde { "~" }
     Pipe { "|" }
     ComparisonOp { "=" | "!=" | "<" | "<=" | ">" | ">=" | "=~" | "!~" }
+    ExperimentalOp { "!>" | "!>>" | "!<" | "!<<" | "!~" }
     ScalarOp {"+" | "-" | "*" | "/" | "%" | "^"  }
     FieldOp { ComparisonOp | ScalarOp | tilde }
 
