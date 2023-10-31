@@ -138,15 +138,16 @@ Static {
 }
 
 IntrinsicField {
-    "duration" |
     "childCount" |
-    "name" |
-    "status" |
+    "duration" |
     "kind" |
-    Parent |
+    "name" |
     "rootName" |
     "rootServiceName" |
-    "traceDuration"
+    "status" |
+    "statusMessage" |
+    "traceDuration" |
+    Parent
 }
 
 AttributeField {
