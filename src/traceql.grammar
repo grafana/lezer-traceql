@@ -195,9 +195,15 @@ AttributeField {
     Resource { "resource" }
     Span { "span" }
 
+    LineComment { "//" ![\n]* }
+    BlockComment { "/*" (![.] | ".")* "*/" }  // to be improved
+
     @precedence { Parent, Resource, Span, Identifier }
+
+    // Required to avoid ambiguity between "/" and "//"
+    @precedence { LineComment, ScalarOp, FieldOp }
 }
 
 @skip {
-    whitespace
+    whitespace | LineComment | BlockComment
 }
