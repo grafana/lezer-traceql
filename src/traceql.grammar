@@ -159,7 +159,6 @@ AttributeField {
     Parent "." Span "." Identifier
 }
 
-
 @tokens {
     identifierExpression { $[a-zA-Z_.]$[a-zA-Z0-9_.]* }
     templateVariableWithBraces {  
@@ -195,9 +194,25 @@ AttributeField {
     Resource { "resource" }
     Span { "span" }
 
+    LineComment { "//" ![\n]* }
+
     @precedence { Parent, Resource, Span, Identifier }
+
+    // Required to avoid ambiguity between "/" and "//"
+    @precedence { LineComment, ScalarOp, FieldOp }
 }
 
 @skip {
-    whitespace
+    // `BlockComment` is needed also here
+    whitespace | LineComment | BlockComment
+}
+
+@skip {} {
+  BlockComment { "/*" (blockCommentContent | blockCommentNewline)* blockCommentEnd }
+}
+
+@local tokens {
+  blockCommentEnd { "*/" }
+  blockCommentNewline { "\n" }
+  @else blockCommentContent
 }
