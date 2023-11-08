@@ -160,14 +160,14 @@ AttributeField {
 }
 
 @tokens {
-    identifierExpression { $[a-zA-Z_.]$[a-zA-Z0-9_.]* }
+    identifierExpression { (('"'  (![\\"] | "\\\\" | '\\"')* '"' ) | $[a-zA-Z0-9_.])+ }
     templateVariableWithBraces {  
         "{" identifierExpression "}" | 
         "{" identifierExpression ":" $[a-zA-Z0-9_.]+ "}"  
     }
 
     whitespace { std.whitespace+ }
-    String { '"' (![\\\n"]+)* '"' }
+    String { '"' (!["\\] | '\\"' | "\\\\")* '"' }
     Integer { @digit+ }
     Float { @digit+ "." @digit+ }
     Duration { @digit+ ("ms"|"s"|"m"|"h") }
