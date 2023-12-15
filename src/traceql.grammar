@@ -160,7 +160,11 @@ AttributeField {
 }
 
 @tokens {
-    identifierExpression { (('"'  (![\\"] | "\\\\" | '\\"')* '"' ) | $[a-zA-Z0-9_.])+ }
+    // All caracters but whitespace and those listed at the following link are valid:
+    // https://github.com/grafana/tempo/blob/b29c9413358da6e1b66c2930991eca2f10d9ec88/pkg/traceql/lexer.go#L350
+    // Some valid queries are currently not handled by the parser, because there are some issues in writing the correct regex.
+    // We should handle this, and potentially also simplify the regex.
+    identifierExpression { (('"'  (![\\"] | "\\\\" | '\\"')* '"' ) | $[a-zA-Z_@#$%*-+?:;'`]) (('"'  (![\\"] | "\\\\" | '\\"')* '"' ) | ![^{}()=~!<>&|," ])* }
     templateVariableWithBraces {  
         "{" identifierExpression "}" | 
         "{" identifierExpression ":" $[a-zA-Z0-9_.]+ "}"  
