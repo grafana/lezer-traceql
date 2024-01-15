@@ -151,7 +151,6 @@ IntrinsicField {
 }
 
 AttributeField {
-    "." Identifier |
     Resource "." Identifier |
     Span "." Identifier |
     Parent "." Identifier |
