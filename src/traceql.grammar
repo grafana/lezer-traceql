@@ -174,9 +174,9 @@ AttributeField {
     String { '"' (!["\\] | '\\"' | "\\\\")* '"' }
     Integer { @digit+ }
     Float { @digit+ "." @digit+ }
-    Duration { @digit+ ("ms"|"s"|"m"|"h") }
+    Duration { (Integer | Float) ("us"|"µs"|"ns"|"ms"|"s"|"m"|"h") }
 
-    @precedence { Float, Duration, Integer }
+    @precedence { Duration, Float, Integer }
 
     Identifier { identifierExpression | "$" templateVariableWithBraces }
     TemplateVariable { "$" identifierExpression | "$" templateVariableWithBraces }
