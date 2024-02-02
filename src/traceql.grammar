@@ -171,7 +171,10 @@ AttributeField {
     }
 
     whitespace { std.whitespace+ }
-    String { '"' (!["\\] | '\\"' | "\\\\")* '"' }
+    stringBacktick { "`" ![`]* "`" }
+    stringDouble { '"' (!["\\] | '\\"' | "\\\\")* '"' }  // single quote (') strings are currently not supported
+
+    String { (stringDouble) | (stringBacktick) }
     Integer { @digit+ }
     Float { @digit+ "." @digit+ }
     Duration { (Integer | Float) ("us"|"µs"|"ns"|"ms"|"s"|"m"|"h") }
