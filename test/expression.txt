@@ -461,7 +461,7 @@ TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(Span
 # { status = error } | count_over_time(5m) by (resource.a)
 { status = error } | count_over_time(5m) by (resource.a)
 ==>
-TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(IntrinsicField), FieldOp, FieldExpression(Static))))), Pipe, SpansetPipelineExpression(SpansetPipeline(MetricsOperation(MetricsOperationType, ⚠(Duration), MetricsArgs(MetricsQuery(MetricsQueryExpression(IntrinsicField(⚠)))), GroupOperation(FieldExpression(AttributeField(Resource, Identifier))))))))
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(IntrinsicField), FieldOp, FieldExpression(Static))))), Pipe, SpansetPipelineExpression(SpansetPipeline(MetricsOperation(MetricsOperationType, MetricsArgs(Duration), GroupOperation(FieldExpression(AttributeField(Resource, Identifier))))))))
 
 # { resource.service.name = "A" } | count_over_time(duration, 5m) by (resource.a)
 { resource.service.name = "A" } | count_over_time(duration, 5m) by (resource.a)
