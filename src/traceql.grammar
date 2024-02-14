@@ -45,7 +45,8 @@ SpansetPipeline {
     ScalarFilter |
     GroupOperation |
     SelectOperation |
-    CoalesceOperation
+    CoalesceOperation |
+    MetricsOperation
 }
 
 GroupOperation {
@@ -64,6 +65,12 @@ SelectArgs {
     FieldExpression |
     SelectArgs "," FieldExpression
 }
+
+MetricsOperation {
+    MetricsArgs "()" GroupOperation
+}
+
+MetricsArgs { "rate" | "count_over_time" | "avg_over_time" | "max_over_time" | "min_over_time" | "quantile_over_time" }
 
 SpansetExpression {
     "(" SpansetExpression !close_paren ")" |
