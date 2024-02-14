@@ -456,9 +456,19 @@ TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpre
 # {} | rate() by (resource.a)
 {} | rate() by (resource.a)
 ==>
-TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter)), Pipe, SpansetPipelineExpression(SpansetPipeline(MetricsOperation(MetricsArgs, GroupOperation(FieldExpression(AttributeField(Resource, Identifier))))))))
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter)), Pipe, SpansetPipelineExpression(SpansetPipeline(MetricsOperation(MetricsOperationType, GroupOperation(FieldExpression(AttributeField(Resource, Identifier))))))))
 
-# {status=error} | count_over_time() by (resource.a)
-{status=error} | count_over_time() by (resource.a)
+# { status = error } | count_over_time() by (resource.a)
+{ status = error } | count_over_time() by (resource.a)
 ==>
-TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(IntrinsicField), FieldOp, FieldExpression(Static))))), Pipe, SpansetPipelineExpression(SpansetPipeline(MetricsOperation(MetricsArgs, GroupOperation(FieldExpression(AttributeField(Resource, Identifier))))))))
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(IntrinsicField), FieldOp, FieldExpression(Static))))), Pipe, SpansetPipelineExpression(SpansetPipeline(MetricsOperation(MetricsOperationType, GroupOperation(FieldExpression(AttributeField(Resource, Identifier))))))))
+
+# {resource.service.name = "A" } >> {resouce.service.name = "B" } | rate()
+{resource.service.name = "A" } >> {resouce.service.name = "B" } | rate()
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Resource, Identifier)), FieldOp, FieldExpression(Static(String)))))), Desc, SpansetPipelineExpression(SpansetPipeline(SpansetFilter(⚠, FieldExpression(FieldExpression(AttributeField(Identifier)), FieldOp, FieldExpression(Static(String))))))), Pipe, SpansetPipelineExpression(SpansetPipeline(MetricsOperation(MetricsOperationType)))))
+
+# { resource.service.name = "A" } | quantile_over_time(duration, 0.95, 5m) by (span.http.path)
+{ resource.service.name = "A" } | quantile_over_time(duration, 0.95, 5m) by (span.http.path)
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Resource, Identifier)), FieldOp, FieldExpression(Static(String)))))), Pipe, SpansetPipelineExpression(SpansetPipeline(MetricsOperation(MetricsOperationType, SelectArgs(SelectArgs(SelectArgs(FieldExpression(IntrinsicField)), FieldExpression(Static(Float))), FieldExpression(Static(Duration))), GroupOperation(FieldExpression(AttributeField(Span, Identifier))))))))
