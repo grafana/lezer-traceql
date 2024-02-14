@@ -453,3 +453,12 @@ TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpre
 ==>
 TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static)))), Pipe, SpansetPipelineExpression(SpansetPipeline(GroupOperation(FieldExpression(FieldExpression(FieldExpression(Static(Integer)), FieldOp, FieldExpression(AttributeField(Identifier))), FieldOp, FieldExpression(Static(Integer))))))), Pipe, SpansetPipelineExpression(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(IntrinsicField))), ComparisonOp, ScalarExpression(Duration))))))
 
+# {} | rate() by (resource.a)
+{} | rate() by (resource.a)
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter)), Pipe, SpansetPipelineExpression(SpansetPipeline(MetricsOperation(MetricsArgs, GroupOperation(FieldExpression(AttributeField(Resource, Identifier))))))))
+
+# {status=error} | count_over_time() by (resource.a)
+{status=error} | count_over_time() by (resource.a)
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(IntrinsicField), FieldOp, FieldExpression(Static))))), Pipe, SpansetPipelineExpression(SpansetPipeline(MetricsOperation(MetricsArgs, GroupOperation(FieldExpression(AttributeField(Resource, Identifier))))))))
