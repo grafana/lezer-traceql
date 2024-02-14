@@ -128,11 +128,17 @@ MetricsOperation {
 MetricsOperationType { "rate" | "count_over_time" | "avg_over_time" | "max_over_time" | "min_over_time" | "quantile_over_time" }
 
 MetricsArgs {
-    MetricsExpression |
-    MetricsArgs "," MetricsExpression
+    MetricsQuery |
+    MetricsQuery "," Duration |
+    MetricsQuery "," Float "," Duration
 }
 
-MetricsExpression {
+MetricsQuery {
+    MetricsQueryExpression |
+    MetricsQuery "," MetricsQueryExpression
+}
+
+MetricsQueryExpression {
     IntrinsicField |
     AttributeField
 }
