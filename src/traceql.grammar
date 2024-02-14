@@ -119,6 +119,8 @@ FieldExpression {
 }
 
 MetricsOperation {
+    MetricsOperationType "()" |
+    MetricsOperationType "(" SelectArgs ")" |
     MetricsOperationType "()" GroupOperation | 
     MetricsOperationType "(" SelectArgs ")" GroupOperation
 }
