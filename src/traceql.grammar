@@ -120,12 +120,22 @@ FieldExpression {
 
 MetricsOperation {
     MetricsOperationType "()" |
-    MetricsOperationType "(" SelectArgs ")" |
     MetricsOperationType "()" GroupOperation | 
-    MetricsOperationType "(" SelectArgs ")" GroupOperation
+    MetricsOperationType "(" MetricsArgs ")" |
+    MetricsOperationType "(" MetricsArgs ")" GroupOperation
 }
 
 MetricsOperationType { "rate" | "count_over_time" | "avg_over_time" | "max_over_time" | "min_over_time" | "quantile_over_time" }
+
+MetricsArgs {
+    MetricsExpression |
+    MetricsArgs "," MetricsExpression
+}
+
+MetricsExpression {
+    IntrinsicField |
+    AttributeField
+}
 
 Static {
     String |
