@@ -45,7 +45,8 @@ SpansetPipeline {
     ScalarFilter |
     GroupOperation |
     SelectOperation |
-    CoalesceOperation
+    CoalesceOperation |
+    MetricsOperation
 }
 
 GroupOperation {
@@ -113,6 +114,32 @@ FieldExpression {
     !prefix "-" FieldExpression |
     !prefix "!" FieldExpression |
     Static |
+    IntrinsicField |
+    AttributeField
+}
+
+MetricsOperation {
+    MetricsOperationType "()" |
+    MetricsOperationType "()" GroupOperation | 
+    MetricsOperationType "(" MetricsArgs ")" |
+    MetricsOperationType "(" MetricsArgs ")" GroupOperation
+}
+
+MetricsOperationType { "rate" | "count_over_time" | "avg_over_time" | "max_over_time" | "min_over_time" | "quantile_over_time" }
+
+MetricsArgs {
+    Duration |
+    MetricsQuery |
+    MetricsQuery "," Duration |
+    MetricsQuery "," Float "," Duration
+}
+
+MetricsQuery {
+    MetricsQueryExpression |
+    MetricsQuery "," MetricsQueryExpression
+}
+
+MetricsQueryExpression {
     IntrinsicField |
     AttributeField
 }
