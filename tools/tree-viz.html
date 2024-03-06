@@ -25,13 +25,14 @@
   </head>
   <body>
     <textarea style="width: 100%; resize: vertical" id="in" type="text">{ span.foo = 5 }</textarea>
-    <div id="cursor-pos"></div>
+    <div><span id="cursor-pos" ></span><span id="is-invalid" style="color: #ee0000"></span></div>
     <div id="out"></div>
     <script type="module">
       import('@grafana/lezer-traceql').then(
         (lezerTraceql) => {
           const inElem = document.querySelector('#in');
           const cursorPosElem = document.querySelector('#cursor-pos');
+          const isInvalidElem = document.querySelector('#is-invalid');
 
           let currentlyVisualizedText = '';
           let currentlyVisualizedPos = 0;
@@ -94,6 +95,11 @@
             currentlyVisualizedPos = pos;
 
             cursorPosElem.innerHTML = pos.toString();
+            
+            // Show error message if errors are detected.
+            // We need to enforce the inner HTML to be an empty string if there are no errors because we need
+            // to reset it in case it was set in the previous render cycle
+            isInvalidElem.innerHTML = errorNodeCursors.length ? " Invalid query!" : "";
           }
 
           render();
