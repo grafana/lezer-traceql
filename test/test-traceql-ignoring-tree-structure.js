@@ -5,12 +5,12 @@ import * as fs from "fs";
 import * as path from "path";
 import { fileURLToPath } from "url";
 
-let caseDir = path.dirname(fileURLToPath(import.meta.url));
+let caseDir = path.dirname(fileURLToPath(import.meta.url)) + '/ignoring-structure';
 
 // TECHDEBT: remove duplication here
 // TECHDEBT: simplify content of `validQueries.txt` and `invalidQueries.txt` — we can just list queries in them
 for (const file of fs.readdirSync(caseDir)) {
-  if (!/^validQueries\.txt$/.test(file)) continue;
+  if (!/validQueries\.txt$/.test(file)) continue;
 
   const name = /^[^\.]*/.exec(file)[0];
   describe(name, () => {
@@ -24,7 +24,7 @@ for (const file of fs.readdirSync(caseDir)) {
 }
 
 for (const file of fs.readdirSync(caseDir)) {
-  if (!/^invalidQueries\.txt$/.test(file)) continue;
+  if (!/invalidQueries\.txt$/.test(file)) continue;
 
   const name = /^[^\.]*/.exec(file)[0];
   describe(name, () => {

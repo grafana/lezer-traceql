@@ -1,0 +1,35 @@
+# { span.foo = 5 } && avg(.foo) = 3
+{ span.foo = 5 } && avg(.foo) = 3
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Span, Identifier)), FieldOp, FieldExpression(Static(Integer)))))), And, SpansetPipelineExpression(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(AttributeField(Identifier)))), ComparisonOp, ScalarExpression(Integer))))))
+
+# { 1 ~ 2 }
+{ 1 ~ 2 }
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static(Integer)), ⚠, ⚠(Integer)))))
+
+# ({ true } | count() > 1) | { false }
+({ true } | count() > 1) | { false }
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static)))), Pipe, SpansetPipelineExpression(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate), ComparisonOp, ScalarExpression(Integer)))))), Pipe, SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static))))))
+
+# ({ true } | { true }) && { true }
+({ true } | { true }) && { true }
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static)))), Pipe, SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static)))))), And, SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static))))))
+
+# { error = true } | by(resource.service.name) | count() > 1
+{ error = true } | by(resource.service.name) | count() > 1
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(Static), FieldOp, FieldExpression(Static))))), Pipe, SpansetPipelineExpression(SpansetPipeline(GroupOperation(FieldExpression(AttributeField(Resource, Identifier)))))), Pipe, SpansetPipelineExpression(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate), ComparisonOp, ScalarExpression(Integer))))))
+
+# {span.http.status_code = 200} | select(span.http.status_code) && count() > 2
+{span.http.status_code = 200} | select(span.http.status_code) && count() > 2
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Span, Identifier)), FieldOp, FieldExpression(Static(Integer)))))), Pipe, SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SelectOperation(SelectArgs(FieldExpression(AttributeField(Span, Identifier)))))), And, SpansetPipelineExpression(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate), ComparisonOp, ScalarExpression(Integer)))))))
+
+# avg(span.http.status_code) > 1 && {true}
+avg(span.http.status_code) > 1 && {true}
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(AttributeField(Span, Identifier)))), ComparisonOp, ScalarExpression(Integer)))), And, SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static))))))
+
