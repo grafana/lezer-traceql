@@ -14,7 +14,8 @@
   },
   "scripts": {
     "build": "bash ./build.sh",
-    "test": "mocha test/test-*.js"
+    "test": "mocha test/test-*.js",
+    "test-ignoring-tree-structure": "mocha test/test-traceql-ignoring-tree-structure.js"
   },
   "devDependencies": {
     "@lezer/lr": "^1.3.0",

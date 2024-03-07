@@ -1,0 +1,591 @@
+# { true }
+{ true }
+==>
+TraceQL(...)
+
+# { !true }
+{ !true }
+==>
+TraceQL(...)
+
+# { true && false }
+{ true && false }
+==>
+TraceQL(...)
+
+# { true || false }
+{ true || false }
+==>
+TraceQL(...)
+
+# { 1 = 2 }
+{ 1 = 2 }
+==>
+TraceQL(...)
+
+# { 1 != 2 }
+{ 1 != 2 }
+==>
+TraceQL(...)
+
+# { 1 > 2 }
+{ 1 > 2 }
+==>
+TraceQL(...)
+
+# { 1 >= 2 }
+{ 1 >= 2 }
+==>
+TraceQL(...)
+
+# { 1 < 2 }
+{ 1 < 2 }
+==>
+TraceQL(...)
+
+# { 1 <= 2 }
+{ 1 <= 2 }
+==>
+TraceQL(...)
+
+# { -1 = 2 }
+{ -1 = 2 }
+==>
+TraceQL(...)
+
+# { "test" =~ "test" }
+{ "test" =~ "test" }
+==>
+TraceQL(...)
+
+# { "test" !~ "test" }
+{ "test" !~ "test" }
+==>
+TraceQL(...)
+
+# { "test" = "test" }
+{ "test" = "test" }
+==>
+TraceQL(...)
+
+# { "test" != "test" }
+{ "test" != "test" }
+==>
+TraceQL(...)
+
+# { .a }
+{ .a }
+==>
+TraceQL(...)
+
+# { !.a }
+{ !.a }
+==>
+TraceQL(...)
+
+# { .a && false }
+{ .a && false }
+==>
+TraceQL(...)
+
+# { .a || true }
+{ .a || true }
+==>
+TraceQL(...)
+
+# { .a = 2 }
+{ .a = 2 }
+==>
+TraceQL(...)
+
+# { .a != 2 }
+{ .a != 2 }
+==>
+TraceQL(...)
+
+# { .a > 2 }
+{ .a > 2 }
+==>
+TraceQL(...)
+
+# { .a >= 2 }
+{ .a >= 2 }
+==>
+TraceQL(...)
+
+# { .a < 2 }
+{ .a < 2 }
+==>
+TraceQL(...)
+
+# { .a <= 2 }
+{ .a <= 2 }
+==>
+TraceQL(...)
+
+# { -.a = 2 }
+{ -.a = 2 }
+==>
+TraceQL(...)
+
+# { .a =~ "test" }
+{ .a =~ "test" }
+==>
+TraceQL(...)
+
+# { .a !~ "test" }
+{ .a !~ "test" }
+==>
+TraceQL(...)
+
+# { .a = "test" }
+{ .a = "test" }
+==>
+TraceQL(...)
+
+# { .a != "test" }
+{ .a != "test" }
+==>
+TraceQL(...)
+
+# { resource.a != 3 }
+{ resource.a != 3 }
+==>
+TraceQL(...)
+
+# { span.a != 3 }
+{ span.a != 3 }
+==>
+TraceQL(...)
+
+# { !("test" != .c || ((true && .b) || 3 < .a)) }
+{ !("test" != .c || ((true && .b) || 3 < .a)) }
+==>
+TraceQL(...)
+
+# { status = ok }
+{ status = ok }
+==>
+TraceQL(...)
+
+# { status = unset }
+{ status = unset }
+==>
+TraceQL(...)
+
+# { status = error }
+{ status = error }
+==>
+TraceQL(...)
+
+# { status != error }
+{ status != error }
+==>
+TraceQL(...)
+
+# { kind = internal }
+{ kind = internal }
+==>
+TraceQL(...)
+
+# { kind = client }
+{ kind = client }
+==>
+TraceQL(...)
+
+# { kind = consumer }
+{ kind = consumer }
+==>
+TraceQL(...)
+
+# { traceDuration > 1s }
+{ traceDuration > 1s }
+==>
+TraceQL(...)
+
+# { rootServiceName = "foo" }
+{ rootServiceName = "foo" }
+==>
+TraceQL(...)
+
+# { rootName != "foo" }
+{ rootName != "foo" }
+==>
+TraceQL(...)
+
+# { duration > 1s }
+{ duration > 1s }
+==>
+TraceQL(...)
+
+# { 1 < 1h }
+{ 1 < 1h }
+==>
+TraceQL(...)
+
+# { 1 <= 1.1 }
+{ 1 <= 1.1 }
+==>
+TraceQL(...)
+
+# { 1 + 1 = 2 }
+{ 1 + 1 = 2 }
+==>
+TraceQL(...)
+
+# { 1 - 1 = 2 }
+{ 1 - 1 = 2 }
+==>
+TraceQL(...)
+
+# { 1 * 1 = 2 }
+{ 1 * 1 = 2 }
+==>
+TraceQL(...)
+
+# { 1 / 1 = 2 }
+{ 1 / 1 = 2 }
+==>
+TraceQL(...)
+
+# { 1 ^ 1 = 2 }
+{ 1 ^ 1 = 2 }
+==>
+TraceQL(...)
+
+# { .a + 1 = 2 }
+{ .a + 1 = 2 }
+==>
+TraceQL(...)
+
+# { .a - 1 = 2 }
+{ .a - 1 = 2 }
+==>
+TraceQL(...)
+
+# { .a * 1 = 2 }
+{ .a * 1 = 2 }
+==>
+TraceQL(...)
+
+# { .a / 1 = 2 }
+{ .a / 1 = 2 }
+==>
+TraceQL(...)
+
+# { .a ^ 1 = 2 }
+{ .a ^ 1 = 2 }
+==>
+TraceQL(...)
+
+# { duration > 1s * 2s }
+{ duration > 1s * 2s }
+==>
+TraceQL(...)
+
+# { 1 * 1h = 1 }
+{ 1 * 1h = 1 }
+==>
+TraceQL(...)
+
+# { 1 / 1.1 = 1 }
+{ 1 / 1.1 = 1 }
+==>
+TraceQL(...)
+
+# { .http.status >= "200" }
+{ .http.status >= "200" }
+==>
+TraceQL(...)
+
+# { true } && { true }
+{ true } && { true }
+==>
+TraceQL(...)
+
+# { true } || { true }
+{ true } || { true }
+==>
+TraceQL(...)
+
+# avg(.field) > 1
+avg(.field) > 1
+==>
+TraceQL(...)
+
+# max(duration) >= 1s
+max(duration) >= 1s
+==>
+TraceQL(...)
+
+# max(duration) > 1
+max(duration) > 1
+==>
+TraceQL(...)
+
+# { true } | max(duration) = 1h
+{ true } | max(duration) = 1h
+==>
+TraceQL(...)
+
+# { true } | min(duration) = 1h
+{ true } | min(duration) = 1h
+==>
+TraceQL(...)
+
+# { true } | sum(duration) = 1h
+{ true } | sum(duration) = 1h
+==>
+TraceQL(...)
+
+# { true } | max(.a) = 1
+{ true } | max(.a) = 1
+==>
+TraceQL(...)
+
+# { true } | max(span.a) = 1
+{ true } | max(span.a) = 1
+==>
+TraceQL(...)
+
+# { true } | max(resource.a) = 1
+{ true } | max(resource.a) = 1
+==>
+TraceQL(...)
+
+# { true } | max(1 + .a) = 1
+{ true } | max(1 + .a) = 1
+==>
+TraceQL(...)
+
+# { true } | max((1 + .a) * 2) = 1
+{ true } | max((1 + .a) * 2) = 1
+==>
+TraceQL(...)
+
+# max(duration) > 3s | { status = error || .http.status = 500 }
+max(duration) > 3s | { status = error || .http.status = 500 }
+==>
+TraceQL(...)
+
+# select(.a)
+select(.a)
+==>
+TraceQL(...)
+
+# {} | select(.a,.b,.c)
+{} | select(.a,.b,.c)
+==>
+TraceQL(...)
+
+# { true } | { .a }
+{ true } | { .a }
+==>
+TraceQL(...)
+
+# { true } | count() = 1
+{ true } | count() = 1
+==>
+TraceQL(...)
+
+# { true } | avg(duration) = 1h
+{ true } | avg(duration) = 1h
+==>
+TraceQL(...)
+
+# count() = 1 | { true }
+count() = 1 | { true }
+==>
+TraceQL(...)
+
+# { true } | count() = 1 | { true }
+{ true } | count() = 1 | { true }
+==>
+TraceQL(...)
+
+# ({ true } | count() > 1 | { false }) && ({ true } | count() > 1 | { false })
+({ true } | count() > 1 | { false }) && ({ true } | count() > 1 | { false })
+==>
+TraceQL(...)
+
+# ({ true } | count() > 1 | { false }) || ({ true } | count() > 1 | { false })
+({ true } | count() > 1 | { false }) || ({ true } | count() > 1 | { false })
+==>
+TraceQL(...)
+
+# { true } | coalesce()
+{ true } | coalesce()
+==>
+TraceQL(...)
+
+# { true } | by(1 + .a) | coalesce()
+{ true } | by(1 + .a) | coalesce()
+==>
+TraceQL(...)
+
+# { true } | by(.a)
+{ true } | by(.a)
+==>
+TraceQL(...)
+
+# { true } | by(1 + .a)
+{ true } | by(1 + .a)
+==>
+TraceQL(...)
+
+# by(.a) | { true }
+by(.a) | { true }
+==>
+TraceQL(...)
+
+# { true } | by(name) | count() > 2
+{ true } | by(name) | count() > 2
+==>
+TraceQL(...)
+
+# { true } | by(.field) | avg(.b) = 2
+{ true } | by(.field) | avg(.b) = 2
+==>
+TraceQL(...)
+
+# { true } | by(3 * .field - 2) | max(duration) < 1s
+{ true } | by(3 * .field - 2) | max(duration) < 1s
+==>
+TraceQL(...)
+
+
+
+# {}
+{}
+==>
+TraceQL(...)
+
+# max(duration) > 1ms | max(duration) > 1ms
+max(duration) > 1ms | max(duration) > 1ms
+==>
+TraceQL(...)
+
+# avg(.foo) = 1 | max(duration) > 1ms
+avg(.foo) = 1 | max(duration) > 1ms
+==>
+TraceQL(...)
+
+# { status = error } | avg(duration) > 100ms | { status = error } | avg(duration) > 100ms
+{ status = error } | avg(duration) > 100ms | { status = error } | avg(duration) > 100ms
+==>
+TraceQL(...)
+
+# { true } | { true || true }
+{ true } | { true || true }
+==>
+TraceQL(...)
+
+# { true } >> { true || true }
+{ true } >> { true || true }
+==>
+TraceQL(...)
+
+# { true } > { true || true }
+{ true } > { true || true }
+==>
+TraceQL(...)
+
+# ({ true } | count() > 1 | { false })
+({ true } | count() > 1 | { false })
+==>
+TraceQL(...)
+
+# { true } ~ { true }
+{ true } ~ { true }
+==>
+TraceQL(...)
+
+# ({ true } | { true }) && ({ true })
+({ true } | { true }) && ({ true })
+==>
+TraceQL(...)
+
+# ({ true }) && { true }
+({ true }) && { true }
+==>
+TraceQL(...)
+
+# ({ true }) << { true }
+({ true }) << { true }
+==>
+TraceQL(...)
+
+# { true } // comment
+{ true } // comment
+==>
+TraceQL(...)
+
+# { true /* block \n * / //comment */ }
+{ true /* block \n * / //comment */ }
+==>
+TraceQL(...)
+
+# { .hel"lo~wor"ld }
+{ .hel"lo wor"ld }
+==>
+TraceQL(...)
+
+# { ."hello\"world" = "GET" }
+{ ."hello\"world" = "GET" }
+==>
+TraceQL(...)
+
+# { .h"ell"o_wo"r"ld = "GET" }
+{ .h"ell"o_wo"r"ld = "GET" }
+==>
+TraceQL(...)
+
+# { ."hello"wo\\rld" = "GET }
+{ ."hello"world" = "GET }
+==>
+TraceQL(...)
+
+# { .foo = "G\"E\\T" }
+{ .foo = "G\"E\\T" }
+==>
+TraceQL(...)
+
+# { .foo-bar }
+{ .foo-bar }
+==>
+TraceQL(...)
+
+# { .a@#$%*-+_?/:;'`\ }
+{ .a@#$%*-+_?/:;'`\ }
+==>
+TraceQL(...)
+
+# { .foo = "GET" }
+{ .foo = "GET" }
+==>
+TraceQL(...)
+
+# {.fo\o.1bar = "GET"}
+{.fo\o.1bar = "GET"}
+==>
+TraceQL(...)
+
+# { duration = 100s }
+{ duration = 100s }
+==>
+TraceQL(...)
+
+# { duration = 123.456us }
+{ duration = 123.456us }
+==>
+TraceQL(...)
+
+# { .foo = `GET` && .bar = `P'O"S\T` }
+{ .foo = `GET` && .bar = `P'O"S\T` }
+==>
+TraceQL(...)
+
+# { .foo = `GET` } | by(.foo, .bar)
+{ .foo = `GET` } | by(.foo, .bar)
+==>
+TraceQL(...)

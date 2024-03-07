@@ -1,0 +1,34 @@
+# { .a"b"c" }
+{ .a"b"c" }
+==>
+TraceQL(..., ⚠)
+
+# { .""" }
+{ .""" }
+==>
+TraceQL(..., ⚠)
+
+# { .h"ell"o_wo"r"ld = "GET }
+{ .h"ell"o_wo"r"ld = "GET }
+==>
+TraceQL(..., ⚠)
+
+# { .h"ell\"o_wo"rld = "GET }
+{ .h"ell\"o_wo"rld = "GET }
+==>
+TraceQL(..., ⚠)
+
+# { .foo = "G"ET" }
+{ .foo = "G"ET" }
+==>
+TraceQL(..., ⚠)
+
+# { .foo = "G\ET" }
+{ .foo = "G\ET" }
+==>
+TraceQL(..., ⚠)
+
+# { .1abc }
+{ .1abc }
+==>
+TraceQL(..., ⚠)

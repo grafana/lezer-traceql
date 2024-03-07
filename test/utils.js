@@ -101,3 +101,76 @@ function getDiffIndex(s1, s2) {
     }
     return i
 }
+
+
+export function runTestsForValidQueries(file, fileName) {
+    let caseExpr = /\s*#\s*(.*)(?:\r\n|\r|\n)([^]*?)==+>([^]*?)(?:$|(?:\r\n|\r|\n)+(?=#))/gy
+    let tests = []
+    let lastIndex = 0;
+    for (;;) {
+        let m = caseExpr.exec(file)
+        if (!m) throw new Error(`Unexpected file format in ${fileName} around\n\n${toLineContext(file, lastIndex)}`)
+
+        let [, name, configStr] = /([^\n]*)(\{.*?\})?$/.exec(m[1])
+        let config = configStr ? JSON.parse(configStr) : null
+
+        let text = m[2].trim(), expected = m[3].trim()
+        tests.push({
+            name,
+            run(parser) {
+                parser = parser.configure({strict: false, ...config})
+
+                const tree = parser.parse(text)
+                const errorNodes = getErrorNodes(tree)
+                if (errorNodes.length > 0) {
+                    throw new Error("errorNodes.length > 0 for " + text)
+                }
+            }
+        })
+        lastIndex = m.index + m[0].length
+        if (lastIndex == file.length) break
+    }
+    return tests
+}
+
+export function runTestsForInvalidQueries(file, fileName) {
+    let caseExpr = /\s*#\s*(.*)(?:\r\n|\r|\n)([^]*?)==+>([^]*?)(?:$|(?:\r\n|\r|\n)+(?=#))/gy
+    let tests = []
+    let lastIndex = 0;
+    for (;;) {
+        let m = caseExpr.exec(file)
+        if (!m) throw new Error(`Unexpected file format in ${fileName} around\n\n${toLineContext(file, lastIndex)}`)
+
+        let [, name, configStr] = /([^\n]*)(\{.*?\})?$/.exec(m[1])
+        let config = configStr ? JSON.parse(configStr) : null
+
+        let text = m[2].trim(), expected = m[3].trim()
+        tests.push({
+            name,
+            run(parser) {
+                parser = parser.configure({strict: false, ...config})
+
+                const tree = parser.parse(text)
+                const errorNodes = getErrorNodes(tree)
+                if (errorNodes.length === 0) {
+                    throw new Error("errorNodes.length === 0 for " + text)
+                }
+            }
+        })
+        lastIndex = m.index + m[0].length
+        if (lastIndex == file.length) break
+    }
+    return tests
+}
+
+function getErrorNodes(tree) {
+    const errorNodes = [];
+    tree.iterate({
+        enter: (nodeRef) => {
+          if (nodeRef.type.id === 0) {
+            errorNodes.push(nodeRef.node);
+          }
+        },
+      });
+    return errorNodes
+}
