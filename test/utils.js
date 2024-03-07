@@ -102,7 +102,7 @@ function getDiffIndex(s1, s2) {
     return i
 }
 
-
+// TECHDEBT: remove duplication with `fileTests`
 export function runTestsForValidQueries(file, fileName) {
     let caseExpr = /\s*#\s*(.*)(?:\r\n|\r|\n)([^]*?)==+>([^]*?)(?:$|(?:\r\n|\r|\n)+(?=#))/gy
     let tests = []
@@ -133,6 +133,7 @@ export function runTestsForValidQueries(file, fileName) {
     return tests
 }
 
+// TECHDEBT: remove duplication with `fileTests`
 export function runTestsForInvalidQueries(file, fileName) {
     let caseExpr = /\s*#\s*(.*)(?:\r\n|\r|\n)([^]*?)==+>([^]*?)(?:$|(?:\r\n|\r|\n)+(?=#))/gy
     let tests = []

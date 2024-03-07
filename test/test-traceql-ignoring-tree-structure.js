@@ -7,6 +7,8 @@ import { fileURLToPath } from "url";
 
 let caseDir = path.dirname(fileURLToPath(import.meta.url));
 
+// TECHDEBT: remove duplication here
+// TECHDEBT: simplify content of `validQueries.txt` and `invalidQueries.txt` — we can just list queries in them
 for (const file of fs.readdirSync(caseDir)) {
   if (!/^validQueries\.txt$/.test(file)) continue;
 
