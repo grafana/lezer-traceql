@@ -50,7 +50,7 @@ SpansetPipeline {
 }
 
 GroupOperation {
-    "by" "(" FieldExpression ")"
+    "by" "(" FieldExpression ("," FieldExpression)* ")"
 }
 
 CoalesceOperation {
