@@ -142,8 +142,7 @@ MetricsOperationQuantile {
 MetricsOperationBasicType { "rate" | "count_over_time" }
 
 MetricsOperationQuantileArgs {
-    MetricsExpression "," MetricsOperationQuantileArgsType |
-    MetricsExpression "," MetricsOperationQuantileArgsType "," MetricsOperationQuantileArgsType
+    MetricsExpression "," MetricsOperationQuantileArgsType ("," MetricsOperationQuantileArgsType)*
 }
 
 MetricsOperationQuantileArgsType { Float | Integer }
