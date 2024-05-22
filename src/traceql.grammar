@@ -119,27 +119,35 @@ FieldExpression {
 }
 
 MetricsOperation {
-    MetricsOperationType "()" |
-    MetricsOperationType "()" GroupOperation | 
-    MetricsOperationType "(" MetricsArgs ")" |
-    MetricsOperationType "(" MetricsArgs ")" GroupOperation
+    MetricsOperationBasic |
+    MetricsOperationHistogram |
+    MetricsOperationQuantile
 }
 
-MetricsOperationType { "rate" | "count_over_time" | "avg_over_time" | "max_over_time" | "min_over_time" | "quantile_over_time" }
-
-MetricsArgs {
-    Duration |
-    MetricsQuery |
-    MetricsQuery "," Duration |
-    MetricsQuery "," Float "," Duration
+MetricsOperationBasic {
+    MetricsOperationBasicType "()" |
+    MetricsOperationBasicType "()" GroupOperation
 }
 
-MetricsQuery {
-    MetricsQueryExpression |
-    MetricsQuery "," MetricsQueryExpression
+MetricsOperationHistogram {
+    "histogram_over_time" "(" MetricsExpression ")" |
+    "histogram_over_time" "(" MetricsExpression ")" GroupOperation
 }
 
-MetricsQueryExpression {
+MetricsOperationQuantile {
+    "quantile_over_time" "(" MetricsOperationQuantileArgs ")" |
+    "quantile_over_time" "(" MetricsOperationQuantileArgs ")" GroupOperation
+}
+
+MetricsOperationBasicType { "rate" | "count_over_time" }
+
+MetricsOperationQuantileArgs {
+    MetricsExpression "," MetricsOperationQuantileArgsType ("," MetricsOperationQuantileArgsType)*
+}
+
+MetricsOperationQuantileArgsType { Float | Integer }
+
+MetricsExpression {
     IntrinsicField |
     AttributeField
 }
