@@ -258,3 +258,5 @@ AttributeField {
   blockCommentNewline { "\n" }
   @else blockCommentContent
 }
+
+@external propSource traceQLHighlight from "./highlight"
