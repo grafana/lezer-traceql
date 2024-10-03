@@ -179,17 +179,21 @@ IntrinsicField {
     "instrumentation:name" |
     "instrumentation:version" |
     "kind" |
+    "link:spanID" |
+    "link:traceID" |
     "name" |
     "rootName" |
     "rootServiceName" |
     "span:duration" |
     "span:kind" |
+    "span:id" |
     "span:name" |
     "span:status" |
     "span:statusMessage" |
     "status" |
     "statusMessage" |
     "trace:duration" |
+    "trace:id" |
     "trace:rootName" |
     "trace:rootService" |
     "traceDuration" |
