@@ -202,9 +202,15 @@ IntrinsicField {
 
 AttributeField {
     "." Identifier |
+    Event "." Identifier |
+    Instrumentation "." Identifier |
+    Link "." Identifier |
     Resource "." Identifier |
     Span "." Identifier |
     Parent "." Identifier |
+    Parent "." Event "." Identifier
+    Parent "." Instrumentation "." Identifier |
+    Parent "." Link "." Identifier |
     Parent "." Resource "." Identifier |
     Parent "." Span "." Identifier
 }
@@ -248,12 +254,15 @@ AttributeField {
     FieldOp { ComparisonOp | ScalarOp | tilde }
 
     Parent { "parent" }
+    Event { "event" }
+    Instrumentation { "instrumentation" }
+    Link { "link" }
     Resource { "resource" }
     Span { "span" }
 
     LineComment { "//" ![\n]* }
 
-    @precedence { Parent, Resource, Span, Identifier }
+    @precedence { Parent, Resource, Span, Event, Instrumentation, Link, Identifier }
 
     // Required to avoid ambiguity between "/" and "//"
     @precedence { LineComment, ScalarOp, FieldOp }
