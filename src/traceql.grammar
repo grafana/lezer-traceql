@@ -121,7 +121,8 @@ FieldExpression {
 MetricsOperation {
     MetricsOperationBasic |
     MetricsOperationHistogram |
-    MetricsOperationQuantile
+    MetricsOperationQuantile |
+    MetricsOverTime
 }
 
 MetricsOperationBasic {
@@ -138,6 +139,13 @@ MetricsOperationQuantile {
     "quantile_over_time" "(" MetricsOperationQuantileArgs ")" |
     "quantile_over_time" "(" MetricsOperationQuantileArgs ")" GroupOperation
 }
+
+MetricsOverTime {
+    MetricsOverTimeType "(" MetricsExpression ")" |
+    MetricsOverTimeType "(" MetricsExpression ")" GroupOperation
+}
+
+MetricsOverTimeType {"min_over_time" | "max_over_time" | "avg_over_time" | "sum_over_time" }
 
 MetricsOperationBasicType { "rate" | "count_over_time" }
 
