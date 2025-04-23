@@ -481,7 +481,7 @@ TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpre
 # {span.http.url="/api"} &>> {span.http.status_code=500} | by(resource.service.name)
 {span.http.url="/api"} &>> {span.http.status_code=500} | by(resource.service.name)
 ==>
-TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Span, Identifier)), FieldOp, FieldExpression(Static(String)))))), UnionStructuralOp, SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Span, Identifier)), FieldOp, FieldExpression(Static(Integer))))))), Pipe, SpansetPipelineExpression(SpansetPipeline(GroupOperation(FieldExpression(AttributeField(Resource, Identifier)))))))
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Span, Identifier)), FieldOp, FieldExpression(Static(String)))))), UnionStructuralOp, SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Span, Identifier)), FieldOp, FieldExpression(Static(Integer)))))), Pipe, SpansetPipelineExpression(SpansetPipeline(GroupOperation(FieldExpression(AttributeField(Resource, Identifier))))))))
 
 # {} &>> {} 
 {} &>> {}
