@@ -477,3 +477,48 @@ TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(Span
 {resource.service.name = "A" } >> {resource.service.name = "B" } | rate()
 ==>
 TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Resource, Identifier)), FieldOp, FieldExpression(Static(String)))))), Desc, SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Resource, Identifier)), FieldOp, FieldExpression(Static(String))))))), Pipe, SpansetPipelineExpression(SpansetPipeline(MetricsOperation(MetricsOperationBasic(MetricsOperationBasicType))))))
+
+# {span.http.url="/api"} &>> {span.http.status_code=500} | by(resource.service.name)
+{span.http.url="/api"} &>> {span.http.status_code=500} | by(resource.service.name)
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Span, Identifier)), FieldOp, FieldExpression(Static(String)))))), UnionStructuralOp, SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Span, Identifier)), FieldOp, FieldExpression(Static(Integer))))))), Pipe, SpansetPipelineExpression(SpansetPipeline(GroupOperation(FieldExpression(AttributeField(Resource, Identifier)))))))
+
+# {} &>> {} 
+{} &>> {}
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter)), UnionStructuralOp, SpansetPipelineExpression(SpansetPipeline(SpansetFilter))))
+
+# {resource.service.name="database"} &<< {resource.service.name="api"}
+{resource.service.name="database"} &<< {resource.service.name="api"}
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Resource, Identifier)), FieldOp, FieldExpression(Static(String)))))), UnionStructuralOp, SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Resource, Identifier)), FieldOp, FieldExpression(Static(String))))))))
+
+# {status=error} &< {resource.service.name="api"}
+{status=error} &< {resource.service.name="api"}
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(IntrinsicField), FieldOp, FieldExpression(Static))))), UnionStructuralOp, SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Resource, Identifier)), FieldOp, FieldExpression(Static(String))))))))
+
+# {resource.service.name="frontend"} &> {resource.service.name="backend"} 
+{resource.service.name="frontend"} &> {resource.service.name="backend"}
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Resource, Identifier)), FieldOp, FieldExpression(Static(String)))))), UnionStructuralOp, SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Resource, Identifier)), FieldOp, FieldExpression(Static(String))))))))
+
+# {status=error} &~ {status=error}
+{status=error} &~ {status=error}
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(IntrinsicField), FieldOp, FieldExpression(Static))))), UnionStructuralOp, SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(IntrinsicField), FieldOp, FieldExpression(Static)))))))
+
+# {resource.service.name="api"} !>> {status=error}
+{resource.service.name="api"} !>> {status=error}
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Resource, Identifier)), FieldOp, FieldExpression(Static(String)))))), ExperimentalOp, SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(IntrinsicField), FieldOp, FieldExpression(Static)))))))
+
+# {status=error} !< {status=error}
+{status=error} !< {status=error}
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(IntrinsicField), FieldOp, FieldExpression(Static))))), ExperimentalOp, SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(IntrinsicField), FieldOp, FieldExpression(Static)))))))
+
+# {} !< {resource.service.name="service"}
+{} !< {resource.service.name="service"}
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter)), ExperimentalOp, SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Resource, Identifier)), FieldOp, FieldExpression(Static(String))))))))
