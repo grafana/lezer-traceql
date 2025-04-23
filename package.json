@@ -1,6 +1,6 @@
 {
   "name": "@grafana/lezer-traceql",
-  "version": "0.0.20",
+  "version": "0.0.21",
   "description": "Grafana Tempo TraceQL lezer grammar",
   "main": "index.cjs",
   "type": "module",
@@ -17,14 +17,14 @@
     "test": "mocha test/test-*.js"
   },
   "devDependencies": {
-    "@lezer/lr": "^1.3.0",
-    "@lezer/generator": "^1.3.0",
+    "@lezer/lr": "^1.4.2",
+    "@lezer/generator": "^1.7.1",
     "@rollup/plugin-node-resolve": "^9.0.0",
     "mocha": "10.1.0",
     "rollup": "^2.27.1"
   },
   "peerDependencies": {
-    "@lezer/lr": "^1.3.0"
+    "@lezer/lr": "^1.4.2"
   },
   "exports": {
     "types": "./index.d.ts",
