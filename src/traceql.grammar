@@ -16,6 +16,7 @@
     Or @left
     Pipe @left
     ExperimentalOp @left
+    UnionStructuralOp @left
     prefix
     close_paren
 }
@@ -31,6 +32,7 @@ SpansetPipelineExpression {
     SpansetPipelineExpression !tilde tilde SpansetPipelineExpression |
     SpansetPipelineExpression !Pipe Pipe SpansetPipelineExpression |
     SpansetPipelineExpression !ExperimentalOp ExperimentalOp SpansetPipelineExpression |
+    SpansetPipelineExpression !UnionStructuralOp UnionStructuralOp SpansetPipelineExpression |
     WrappedSpansetPipeline |
     SpansetPipeline
 }
@@ -258,6 +260,7 @@ AttributeField {
     Pipe { "|" }
     ComparisonOp { "=" | "!=" | "<" | "<=" | ">" | ">=" | "=~" | "!~" }
     ExperimentalOp { "!>" | "!>>" | "!<" | "!<<" | "!~" }
+    UnionStructuralOp { "&>>" | "&<<" | "&>" | "&<" | "&~" }
     ScalarOp {"+" | "-" | "*" | "/" | "%" | "^"  }
     FieldOp { ComparisonOp | ScalarOp | tilde }
 
