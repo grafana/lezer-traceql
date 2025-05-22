@@ -40,8 +40,15 @@ jobs:
         if: steps.version_check.outputs.changed == 'true'
         run: yarn build
 
+      - id: get-secrets
+        name: get secrets
+        uses: grafana/shared-workflows/actions/get-vault-secrets@5d7e361bc7e0a183cde8afe9899fb7b596d2659b
+        with:
+          repo_secrets: |
+            NPM_TOKEN=npm:token
+
       - name: Publish package to NPM
         if: steps.version_check.outputs.changed == 'true'
         run: npm publish ./dist --access public
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ env.NPM_TOKEN }}
