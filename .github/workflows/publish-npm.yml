@@ -46,8 +46,10 @@ jobs:
         name: get secrets
         uses: grafana/shared-workflows/actions/get-vault-secrets@5d7e361bc7e0a183cde8afe9899fb7b596d2659b
         with:
+          # ci/repo/grafana/<repo> automatically in the path and can be omitted
+          # Secrets placed in the ci/repo/grafana/<repo>/<path> path in Vault
           repo_secrets: |
-            NPM_TOKEN=npm:token
+            NPM_TOKEN=secrets:NPM_TOKEN
 
       - name: Publish package to NPM
         if: steps.version_check.outputs.changed == 'true'
