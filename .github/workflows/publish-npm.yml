@@ -8,6 +8,11 @@ jobs:
   publish:
     name: Publish to NPM Package Registry
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      id-token: write # needed to get vault secrets
+    
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
