@@ -1,6 +1,7 @@
 
 @top TraceQL {
-    SpansetPipelineExpression
+    SpansetPipelineExpression |
+    SpansetPipelineExpression WithHint
 }
 
 @precedence {
@@ -198,6 +199,7 @@ IntrinsicField {
     "span:kind" |
     "span:id" |
     "span:name" |
+    "span:parentID" |
     "span:status" |
     "span:statusMessage" |
     "status" |
@@ -223,6 +225,24 @@ AttributeField {
     Parent "." Link "." Identifier |
     Parent "." Resource "." Identifier |
     Parent "." Span "." Identifier
+}
+
+WithHint {
+    With "(" HintParameters ")"
+}
+
+HintParameters {
+    HintParameter
+}
+
+HintParameter {
+    HintIdentifier "=" HintValue
+}
+
+HintValue {
+    "true" |
+    "false" |
+    Integer
 }
 
 @tokens {
@@ -270,10 +290,13 @@ AttributeField {
     Link { "link" }
     Resource { "resource" }
     Span { "span" }
+    With { "with" }
+
+    HintIdentifier { "most_recent" }
 
     LineComment { "//" ![\n]* }
 
-    @precedence { Parent, Resource, Span, Event, Instrumentation, Link, Identifier }
+    @precedence { Parent, Resource, Span, Event, Instrumentation, Link, With, Identifier }
 
     // Required to avoid ambiguity between "/" and "//"
     @precedence { LineComment, ScalarOp, FieldOp }
