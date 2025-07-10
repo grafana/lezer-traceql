@@ -553,11 +553,6 @@ TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(
 ==>
 TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Identifier)), FieldOp, FieldExpression(Static(String)))))), WithHint(With, HintParameters(HintParameter(HintIdentifier, HintValue))))
 
-# With hint using integer (most_recent doesn't take integer, but other hint variables do): { .service.name = "test" } with (most_recent=1)
-{ .service.name = "test" } with (most_recent=1)
-==>
-TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Identifier)), FieldOp, FieldExpression(Static(String)))))), WithHint(With, HintParameters(HintParameter(HintIdentifier, HintValue(Integer)))))
-
 # Complex query with hint: { .service.name = "test" && .http.status_code = 200 } with (most_recent=true)
 { .service.name = "test" && .http.status_code = 200 } with (most_recent=true)
 ==>

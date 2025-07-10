@@ -241,8 +241,7 @@ HintParameter {
 
 HintValue {
     "true" |
-    "false" |
-    Integer
+    "false"
 }
 
 @tokens {
