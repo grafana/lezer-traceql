@@ -542,3 +542,43 @@ TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(Span
 {} | sum_over_time(resource.a) by (span.http.path)
 ==>
 TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter)), Pipe, SpansetPipelineExpression(SpansetPipeline(MetricsOperation(MetricsOverTime(MetricsOverTimeType, MetricsExpression(AttributeField(Resource, Identifier)), GroupOperation(FieldExpression(AttributeField(Span, Identifier)))))))))
+
+# Basic with hint: { true } with (most_recent=true)
+{ true } with (most_recent=true)
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static)))), WithHint(With, HintParameters(HintParameter(HintIdentifier, HintValue))))
+
+# With hint using false: { .service.name = "test" } with (most_recent=false)
+{ .service.name = "test" } with (most_recent=false)
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Identifier)), FieldOp, FieldExpression(Static(String)))))), WithHint(With, HintParameters(HintParameter(HintIdentifier, HintValue))))
+
+# With hint using integer (most_recent doesn't take integer, but other hint variables do): { .service.name = "test" } with (most_recent=1)
+{ .service.name = "test" } with (most_recent=1)
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Identifier)), FieldOp, FieldExpression(Static(String)))))), WithHint(With, HintParameters(HintParameter(HintIdentifier, HintValue(Integer)))))
+
+# Complex query with hint: { .service.name = "test" && .http.status_code = 200 } with (most_recent=true)
+{ .service.name = "test" && .http.status_code = 200 } with (most_recent=true)
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(FieldExpression(AttributeField(Identifier)), FieldOp, FieldExpression(Static(String))), And, FieldExpression(FieldExpression(AttributeField(Identifier)), FieldOp, FieldExpression(Static(Integer))))))), WithHint(With, HintParameters(HintParameter(HintIdentifier, HintValue))))
+
+# Grouped query with hint: ({ .service.name = "test" }) with (most_recent=true)
+({ .service.name = "test" }) with (most_recent=true)
+==>
+TraceQL(SpansetPipelineExpression(WrappedSpansetPipeline(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Identifier)), FieldOp, FieldExpression(Static(String))))))), WithHint(With, HintParameters(HintParameter(HintIdentifier, HintValue))))
+
+# Pipeline with hint: { .service.name = "test" } | by(.service.name) with (most_recent=true)
+{ .service.name = "test" } | by(.service.name) with (most_recent=true)
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Identifier)), FieldOp, FieldExpression(Static(String)))))), Pipe, SpansetPipelineExpression(SpansetPipeline(GroupOperation(FieldExpression(AttributeField(Identifier)))))), WithHint(With, HintParameters(HintParameter(HintIdentifier, HintValue))))
+
+# Without hint should still work: { .service.name = "test" }
+{ .service.name = "test" }
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Identifier)), FieldOp, FieldExpression(Static(String)))))))
+
+# Intrinsic field with hint: { span:parentID = "abc123" } with (most_recent=true)
+{ span:parentID = "abc123" } with (most_recent=true)
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(IntrinsicField), FieldOp, FieldExpression(Static(String)))))), WithHint(With, HintParameters(HintParameter(HintIdentifier, HintValue))))
