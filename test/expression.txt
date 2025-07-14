@@ -577,3 +577,33 @@ TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(
 { span:parentID = "abc123" } with (most_recent=true)
 ==>
 TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(IntrinsicField), FieldOp, FieldExpression(Static(String)))))), WithHint(With, HintParameters(HintParameter(HintIdentifier, HintValue))))
+
+# Basic compare with status filter: { resource.service.name="a" } | compare({status=error})
+{ resource.service.name="a" } | compare({status=error})
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Resource, Identifier)), FieldOp, FieldExpression(Static(String)))))), Pipe, SpansetPipelineExpression(SpansetPipeline(MetricsOperation(MetricsOperationCompare(SpansetFilter(FieldExpression(FieldExpression(IntrinsicField), FieldOp, FieldExpression(Static)))))))))
+
+# Compare with duration filter: { span.http.path="/myapi" } | compare({duration>1s})
+{ span.http.path="/myapi" } | compare({duration>1s})
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Span, Identifier)), FieldOp, FieldExpression(Static(String)))))), Pipe, SpansetPipelineExpression(SpansetPipeline(MetricsOperation(MetricsOperationCompare(SpansetFilter(FieldExpression(FieldExpression(IntrinsicField), FieldOp, FieldExpression(Static(Duration))))))))))
+
+# Compare with topN parameter: { name="test" } | compare({status=error}, 20)
+{ name="test" } | compare({status=error}, 20)
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(IntrinsicField), FieldOp, FieldExpression(Static(String)))))), Pipe, SpansetPipelineExpression(SpansetPipeline(MetricsOperation(MetricsOperationCompare(SpansetFilter(FieldExpression(FieldExpression(IntrinsicField), FieldOp, FieldExpression(Static))), Integer))))))
+
+# Compare with start and end timestamps: { true } | compare({duration>1s}, 10, 1640995200000000000, 1640995500000000000)
+{ true } | compare({duration>1s}, 10, 1640995200000000000, 1640995500000000000)
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static)))), Pipe, SpansetPipelineExpression(SpansetPipeline(MetricsOperation(MetricsOperationCompare(SpansetFilter(FieldExpression(FieldExpression(IntrinsicField), FieldOp, FieldExpression(Static(Duration)))), Integer, Integer, Integer))))))
+
+# Compare with complex filter expression: { true } | compare({status=error && .http.status_code>400})
+{ true } | compare({status=error && .http.status_code>400})
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static)))), Pipe, SpansetPipelineExpression(SpansetPipeline(MetricsOperation(MetricsOperationCompare(SpansetFilter(FieldExpression(FieldExpression(FieldExpression(IntrinsicField), FieldOp, FieldExpression(Static)), And, FieldExpression(FieldExpression(AttributeField(Identifier)), FieldOp, FieldExpression(Static(Integer)))))))))))
+
+# Compare with empty filter: { resource.service.name="test" } | compare({})
+{ resource.service.name="test" } | compare({})
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Resource, Identifier)), FieldOp, FieldExpression(Static(String)))))), Pipe, SpansetPipelineExpression(SpansetPipeline(MetricsOperation(MetricsOperationCompare(SpansetFilter))))))

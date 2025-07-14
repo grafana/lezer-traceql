@@ -125,6 +125,7 @@ MetricsOperation {
     MetricsOperationBasic |
     MetricsOperationHistogram |
     MetricsOperationQuantile |
+    MetricsOperationCompare |
     MetricsOverTime
 }
 
@@ -314,4 +315,10 @@ HintValue {
   blockCommentEnd { "*/" }
   blockCommentNewline { "\n" }
   @else blockCommentContent
+}
+
+MetricsOperationCompare {
+    "compare" "(" SpansetFilter ")" |
+    "compare" "(" SpansetFilter "," Integer ")" |
+    "compare" "(" SpansetFilter "," Integer "," Integer "," Integer ")"
 }
