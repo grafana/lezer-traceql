@@ -169,7 +169,7 @@ MetricsAggregatorFunctions {
     MetricsAggregatorFunctionType "(" Integer ")"
 }
 
-MetricsAggregatorFunctionType { TopK | BottomK }
+MetricsAggregatorFunctionType { "topk" | "bottomk" }
 
 Static {
     String |
@@ -300,8 +300,6 @@ HintValue {
     With { "with" }
 
     HintIdentifier { "most_recent" }
-    TopK { "topk" }
-    BottomK { "bottomk" }
 
     LineComment { "//" ![\n]* }
 
