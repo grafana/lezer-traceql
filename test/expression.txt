@@ -483,7 +483,7 @@ TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpre
 ==>
 TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Span, Identifier)), FieldOp, FieldExpression(Static(String)))))), UnionStructuralOp, SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Span, Identifier)), FieldOp, FieldExpression(Static(Integer)))))), Pipe, SpansetPipelineExpression(SpansetPipeline(GroupOperation(FieldExpression(AttributeField(Resource, Identifier))))))))
 
-# {} &>> {} 
+# {} &>> {}
 {} &>> {}
 ==>
 TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter)), UnionStructuralOp, SpansetPipelineExpression(SpansetPipeline(SpansetFilter))))
@@ -498,7 +498,7 @@ TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(Span
 ==>
 TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(IntrinsicField), FieldOp, FieldExpression(Static))))), UnionStructuralOp, SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Resource, Identifier)), FieldOp, FieldExpression(Static(String))))))))
 
-# {resource.service.name="frontend"} &> {resource.service.name="backend"} 
+# {resource.service.name="frontend"} &> {resource.service.name="backend"}
 {resource.service.name="frontend"} &> {resource.service.name="backend"}
 ==>
 TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Resource, Identifier)), FieldOp, FieldExpression(Static(String)))))), UnionStructuralOp, SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Resource, Identifier)), FieldOp, FieldExpression(Static(String))))))))
@@ -607,3 +607,33 @@ TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(Span
 { resource.service.name="test" } | compare({})
 ==>
 TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Resource, Identifier)), FieldOp, FieldExpression(Static(String)))))), Pipe, SpansetPipelineExpression(SpansetPipeline(MetricsOperation(MetricsOperationCompare(SpansetFilter))))))
+
+# TopK basic: { } | rate() by(resource.service.name) | topk(5)
+{ } | rate() by(resource.service.name) | topk(5)
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter)), Pipe, SpansetPipelineExpression(SpansetPipeline(MetricsOperation(MetricsOperationBasic(MetricsOperationBasicType, GroupOperation(FieldExpression(AttributeField(Resource, Identifier)))))))), Pipe, SpansetPipelineExpression(SpansetPipeline(MetricsAggregatorFunctions(MetricsAggregatorFunctionType, Integer)))))
+
+# BottomK basic: { } | rate() by(resource.service.name) | bottomk(5)
+{ } | rate() by(resource.service.name) | bottomk(5)
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter)), Pipe, SpansetPipelineExpression(SpansetPipeline(MetricsOperation(MetricsOperationBasic(MetricsOperationBasicType, GroupOperation(FieldExpression(AttributeField(Resource, Identifier)))))))), Pipe, SpansetPipelineExpression(SpansetPipeline(MetricsAggregatorFunctions(MetricsAggregatorFunctionType, Integer)))))
+
+# TopK with more complex query: { resource.service.name = "foo" } | rate() by (span.http.url) | topk(10)
+{ resource.service.name = "foo" } | rate() by (span.http.url) | topk(10)
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(AttributeField(Resource, Identifier)), FieldOp, FieldExpression(Static(String)))))), Pipe, SpansetPipelineExpression(SpansetPipeline(MetricsOperation(MetricsOperationBasic(MetricsOperationBasicType, GroupOperation(FieldExpression(AttributeField(Span, Identifier)))))))), Pipe, SpansetPipelineExpression(SpansetPipeline(MetricsAggregatorFunctions(MetricsAggregatorFunctionType, Integer)))))
+
+# BottomK with histogram: { status = error } | histogram_over_time(duration) by(resource.a) | bottomk(3)
+{ status = error } | histogram_over_time(duration) by(resource.a) | bottomk(3)
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(IntrinsicField), FieldOp, FieldExpression(Static))))), Pipe, SpansetPipelineExpression(SpansetPipeline(MetricsOperation(MetricsOperationHistogram(MetricsExpression(IntrinsicField), GroupOperation(FieldExpression(AttributeField(Resource, Identifier)))))))), Pipe, SpansetPipelineExpression(SpansetPipeline(MetricsAggregatorFunctions(MetricsAggregatorFunctionType, Integer)))))
+
+# TopK without grouping: { } | rate() | topk(5)
+{ } | rate() | topk(5)
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter)), Pipe, SpansetPipelineExpression(SpansetPipeline(MetricsOperation(MetricsOperationBasic(MetricsOperationBasicType))))), Pipe, SpansetPipelineExpression(SpansetPipeline(MetricsAggregatorFunctions(MetricsAggregatorFunctionType, Integer)))))
+
+# BottomK without grouping: { } | rate() | bottomk(5)
+{ } | rate() | bottomk(5)
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter)), Pipe, SpansetPipelineExpression(SpansetPipeline(MetricsOperation(MetricsOperationBasic(MetricsOperationBasicType))))), Pipe, SpansetPipelineExpression(SpansetPipeline(MetricsAggregatorFunctions(MetricsAggregatorFunctionType, Integer)))))

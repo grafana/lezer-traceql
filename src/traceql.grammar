@@ -49,7 +49,8 @@ SpansetPipeline {
     GroupOperation |
     SelectOperation |
     CoalesceOperation |
-    MetricsOperation
+    MetricsOperation |
+    MetricsAggregatorFunctions
 }
 
 GroupOperation {
@@ -96,7 +97,7 @@ ScalarExpression {
     Integer |
     Float |
     Duration |
-    TemplateVariable | 
+    TemplateVariable |
     !prefix "-" Integer |
     !prefix "-" Float |
     !prefix "-" Duration
@@ -164,6 +165,12 @@ MetricsExpression {
     AttributeField
 }
 
+MetricsAggregatorFunctions {
+    MetricsAggregatorFunctionType "(" Integer ")"
+}
+
+MetricsAggregatorFunctionType { "topk" | "bottomk" }
+
 Static {
     String |
     Integer |
@@ -172,7 +179,7 @@ Static {
     "false" |
     "nil" |
     Duration |
-    TemplateVariable | 
+    TemplateVariable |
     "ok" |
     "error" |
     "unset" |
@@ -251,9 +258,9 @@ HintValue {
     // Some valid queries are currently not handled by the parser, because there are some issues in writing the correct regex.
     // We should handle this, and potentially also simplify the regex.
     identifierExpression { (('"'  (![\\"] | "\\\\" | '\\"')* '"' ) | $[a-zA-Z_@#$%*-+?:;'`]) (('"'  (![\\"] | "\\\\" | '\\"')* '"' ) | ![^{}()=~!<>&|," ])* }
-    templateVariableWithBraces {  
-        "{" identifierExpression "}" | 
-        "{" identifierExpression ":" $[a-zA-Z0-9_.]+ "}"  
+    templateVariableWithBraces {
+        "{" identifierExpression "}" |
+        "{" identifierExpression ":" $[a-zA-Z0-9_.]+ "}"
     }
 
     whitespace { std.whitespace+ }
@@ -296,7 +303,7 @@ HintValue {
 
     LineComment { "//" ![\n]* }
 
-    @precedence { Parent, Resource, Span, Event, Instrumentation, Link, With, Identifier }
+    @precedence { Parent, Resource, Span, Event, Instrumentation, Link, With, TopK, BottomK, Identifier }
 
     // Required to avoid ambiguity between "/" and "//"
     @precedence { LineComment, ScalarOp, FieldOp }
