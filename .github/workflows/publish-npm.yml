@@ -34,11 +34,12 @@ jobs:
 
       - name: Setup .npmrc file for NPM registry
         if: steps.version_check.outputs.changed == 'true'
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
-          node-version: "14"
-          registry-url: "https://registry.npmjs.org"
-
+          node-version: '20'
+          scope: '@grafana'
+          registry-url: 'https://registry.npmjs.org'
+          
       - name: Install dependencies
         if: steps.version_check.outputs.changed == 'true'
         run: yarn
