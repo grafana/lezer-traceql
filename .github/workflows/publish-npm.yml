@@ -20,7 +20,7 @@ jobs:
           ref: main
       # limit releases to version changes - https://github.com/EndBug/version-check
       - name: Check version changes
-        uses: EndBug/version-check@eea9dab124be9214bd32356f32f7d8945173db13 # v1
+        uses: EndBug/version-check@d17247dd94ca7b39d0b0691399be8d7c510622c9 # v2
         id: version_check
         with:
           # diff the commits rather than commit message for version changes
