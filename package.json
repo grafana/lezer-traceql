@@ -17,11 +17,11 @@
     "test": "mocha test/test-*.js"
   },
   "devDependencies": {
-    "@lezer/lr": "1.4.9",
+    "@lezer/lr": "1.4.10",
     "@lezer/generator": "1.8.0",
     "@rollup/plugin-node-resolve": "16.0.3",
     "mocha": "11.7.5",
-    "rollup": "4.60.1"
+    "rollup": "4.60.2"
   },
   "peerDependencies": {
     "@lezer/lr": "^1.4.2"
