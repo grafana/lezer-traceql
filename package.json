@@ -40,5 +40,6 @@
     "index.d.ts",
     "index.es.js",
     "package.json"
-  ]
+  ],
+  "packageManager": "npm@11.12.1"
 }
