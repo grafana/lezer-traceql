@@ -311,62 +311,62 @@ TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(Span
 # avg(.field) > 1
 avg(.field) > 1
 ==>
-TraceQL(SpansetPipelineExpression(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(AttributeField(Identifier)))), ComparisonOp, ScalarExpression(Integer)))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(AttributeField(Identifier)))), ComparisonOp, Scalar(Integer)))))
 
 # max(duration) >= 1s
 max(duration) >= 1s
 ==>
-TraceQL(SpansetPipelineExpression(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(IntrinsicField))), ComparisonOp, ScalarExpression(Duration)))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(IntrinsicField))), ComparisonOp, Scalar(Duration)))))
 
 # max(duration) > 1
 max(duration) > 1
 ==>
-TraceQL(SpansetPipelineExpression(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(IntrinsicField))), ComparisonOp, ScalarExpression(Integer)))))
+TraceQL(SpansetPipelineExpression(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(IntrinsicField))), ComparisonOp, Scalar(Integer)))))
 
 # { true } | max(duration) = 1h
 { true } | max(duration) = 1h
 ==>
-TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static)))), Pipe, SpansetPipelineExpression(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(IntrinsicField))), ComparisonOp, ScalarExpression(Duration))))))
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static)))), Pipe, SpansetPipelineExpression(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(IntrinsicField))), ComparisonOp, Scalar(Duration))))))
 
 # { true } | min(duration) = 1h
 { true } | min(duration) = 1h
 ==>
-TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static)))), Pipe, SpansetPipelineExpression(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(IntrinsicField))), ComparisonOp, ScalarExpression(Duration))))))
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static)))), Pipe, SpansetPipelineExpression(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(IntrinsicField))), ComparisonOp, Scalar(Duration))))))
 
 # { true } | sum(duration) = 1h
 { true } | sum(duration) = 1h
 ==>
-TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static)))), Pipe, SpansetPipelineExpression(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(IntrinsicField))), ComparisonOp, ScalarExpression(Duration))))))
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static)))), Pipe, SpansetPipelineExpression(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(IntrinsicField))), ComparisonOp, Scalar(Duration))))))
 
 # { true } | max(.a) = 1
 { true } | max(.a) = 1
 ==>
-TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static)))), Pipe, SpansetPipelineExpression(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(AttributeField(Identifier)))), ComparisonOp, ScalarExpression(Integer))))))
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static)))), Pipe, SpansetPipelineExpression(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(AttributeField(Identifier)))), ComparisonOp, Scalar(Integer))))))
 
 # { true } | max(span.a) = 1
 { true } | max(span.a) = 1
 ==>
-TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static)))), Pipe, SpansetPipelineExpression(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(AttributeField(Span, Identifier)))), ComparisonOp, ScalarExpression(Integer))))))
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static)))), Pipe, SpansetPipelineExpression(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(AttributeField(Span, Identifier)))), ComparisonOp, Scalar(Integer))))))
 
 # { true } | max(resource.a) = 1
 { true } | max(resource.a) = 1
 ==>
-TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static)))), Pipe, SpansetPipelineExpression(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(AttributeField(Resource, Identifier)))), ComparisonOp, ScalarExpression(Integer))))))
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static)))), Pipe, SpansetPipelineExpression(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(AttributeField(Resource, Identifier)))), ComparisonOp, Scalar(Integer))))))
 
 # { true } | max(1 + .a) = 1
 { true } | max(1 + .a) = 1
 ==>
-TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static)))), Pipe, SpansetPipelineExpression(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(FieldExpression(Static(Integer)), FieldOp, FieldExpression(AttributeField(Identifier))))), ComparisonOp, ScalarExpression(Integer))))))
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static)))), Pipe, SpansetPipelineExpression(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(FieldExpression(Static(Integer)), FieldOp, FieldExpression(AttributeField(Identifier))))), ComparisonOp, Scalar(Integer))))))
 
 # { true } | max((1 + .a) * 2) = 1
 { true } | max((1 + .a) * 2) = 1
 ==>
-TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static)))), Pipe, SpansetPipelineExpression(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(FieldExpression(FieldExpression(FieldExpression(Static(Integer)), FieldOp, FieldExpression(AttributeField(Identifier)))), FieldOp, FieldExpression(Static(Integer))))), ComparisonOp, ScalarExpression(Integer))))))
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static)))), Pipe, SpansetPipelineExpression(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(FieldExpression(FieldExpression(FieldExpression(Static(Integer)), FieldOp, FieldExpression(AttributeField(Identifier)))), FieldOp, FieldExpression(Static(Integer))))), ComparisonOp, Scalar(Integer))))))
 
 # max(duration) > 3s | { status = error || .http.status = 500 }
 max(duration) > 3s | { status = error || .http.status = 500 }
 ==>
-TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(IntrinsicField))), ComparisonOp, ScalarExpression(Duration)))), Pipe, SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(FieldExpression(IntrinsicField), FieldOp, FieldExpression(Static)), Or, FieldExpression(FieldExpression(AttributeField(Identifier)), FieldOp, FieldExpression(Static(Integer)))))))))
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(IntrinsicField))), ComparisonOp, Scalar(Duration)))), Pipe, SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(FieldExpression(FieldExpression(IntrinsicField), FieldOp, FieldExpression(Static)), Or, FieldExpression(FieldExpression(AttributeField(Identifier)), FieldOp, FieldExpression(Static(Integer)))))))))
 
 # select(.a)
 select(.a)
@@ -386,32 +386,32 @@ TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(Span
 # { true } | count() = 1
 { true } | count() = 1
 ==>
-TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static)))), Pipe, SpansetPipelineExpression(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate), ComparisonOp, ScalarExpression(Integer))))))
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static)))), Pipe, SpansetPipelineExpression(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate), ComparisonOp, Scalar(Integer))))))
 
 # { true } | avg(duration) = 1h
 { true } | avg(duration) = 1h
 ==>
-TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static)))), Pipe, SpansetPipelineExpression(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(IntrinsicField))), ComparisonOp, ScalarExpression(Duration))))))
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static)))), Pipe, SpansetPipelineExpression(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(IntrinsicField))), ComparisonOp, Scalar(Duration))))))
 
 # count() = 1 | { true }
 count() = 1 | { true }
 ==>
-TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate), ComparisonOp, ScalarExpression(Integer)))), Pipe, SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static))))))
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate), ComparisonOp, Scalar(Integer)))), Pipe, SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static))))))
 
 # { true } | count() = 1 | { true }
 { true } | count() = 1 | { true }
 ==>
-TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static)))), Pipe, SpansetPipelineExpression(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate), ComparisonOp, ScalarExpression(Integer))))), Pipe, SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static))))))
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static)))), Pipe, SpansetPipelineExpression(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate), ComparisonOp, Scalar(Integer))))), Pipe, SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static))))))
 
 # ({ true } | count() > 1 | { false }) && ({ true } | count() > 1 | { false })
 ({ true } | count() > 1 | { false }) && ({ true } | count() > 1 | { false })
 ==>
-TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static)))), Pipe, SpansetPipelineExpression(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate), ComparisonOp, ScalarExpression(Integer))))), Pipe, SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static)))))), And, SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static)))), Pipe, SpansetPipelineExpression(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate), ComparisonOp, ScalarExpression(Integer))))), Pipe, SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static))))))))
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static)))), Pipe, SpansetPipelineExpression(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate), ComparisonOp, Scalar(Integer))))), Pipe, SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static)))))), And, SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static)))), Pipe, SpansetPipelineExpression(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate), ComparisonOp, Scalar(Integer))))), Pipe, SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static))))))))
 
 # ({ true } | count() > 1 | { false }) || ({ true } | count() > 1 | { false })
 ({ true } | count() > 1 | { false }) || ({ true } | count() > 1 | { false })
 ==>
-TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static)))), Pipe, SpansetPipelineExpression(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate), ComparisonOp, ScalarExpression(Integer))))), Pipe, SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static)))))), Or, SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static)))), Pipe, SpansetPipelineExpression(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate), ComparisonOp, ScalarExpression(Integer))))), Pipe, SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static))))))))
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static)))), Pipe, SpansetPipelineExpression(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate), ComparisonOp, Scalar(Integer))))), Pipe, SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static)))))), Or, SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static)))), Pipe, SpansetPipelineExpression(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate), ComparisonOp, Scalar(Integer))))), Pipe, SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static))))))))
 
 # { true } | coalesce()
 { true } | coalesce()
@@ -441,17 +441,17 @@ TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(Grou
 # { true } | by(name) | count() > 2
 { true } | by(name) | count() > 2
 ==>
-TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static)))), Pipe, SpansetPipelineExpression(SpansetPipeline(GroupOperation(FieldExpression(IntrinsicField))))), Pipe, SpansetPipelineExpression(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate), ComparisonOp, ScalarExpression(Integer))))))
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static)))), Pipe, SpansetPipelineExpression(SpansetPipeline(GroupOperation(FieldExpression(IntrinsicField))))), Pipe, SpansetPipelineExpression(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate), ComparisonOp, Scalar(Integer))))))
 
 # { true } | by(.field) | avg(.b) = 2
 { true } | by(.field) | avg(.b) = 2
 ==>
-TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static)))), Pipe, SpansetPipelineExpression(SpansetPipeline(GroupOperation(FieldExpression(AttributeField(Identifier)))))), Pipe, SpansetPipelineExpression(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(AttributeField(Identifier)))), ComparisonOp, ScalarExpression(Integer))))))
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static)))), Pipe, SpansetPipelineExpression(SpansetPipeline(GroupOperation(FieldExpression(AttributeField(Identifier)))))), Pipe, SpansetPipelineExpression(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(AttributeField(Identifier)))), ComparisonOp, Scalar(Integer))))))
 
 # { true } | by(3 * .field - 2) | max(duration) < 1s
 { true } | by(3 * .field - 2) | max(duration) < 1s
 ==>
-TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static)))), Pipe, SpansetPipelineExpression(SpansetPipeline(GroupOperation(FieldExpression(FieldExpression(FieldExpression(Static(Integer)), FieldOp, FieldExpression(AttributeField(Identifier))), FieldOp, FieldExpression(Static(Integer))))))), Pipe, SpansetPipelineExpression(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(IntrinsicField))), ComparisonOp, ScalarExpression(Duration))))))
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(Static)))), Pipe, SpansetPipelineExpression(SpansetPipeline(GroupOperation(FieldExpression(FieldExpression(FieldExpression(Static(Integer)), FieldOp, FieldExpression(AttributeField(Identifier))), FieldOp, FieldExpression(Static(Integer))))))), Pipe, SpansetPipelineExpression(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(IntrinsicField))), ComparisonOp, Scalar(Duration))))))
 
 # {} | rate() by(resource.a)
 {} | rate() by(resource.a)
@@ -637,3 +637,143 @@ TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpre
 { } | rate() | bottomk(5)
 ==>
 TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter)), Pipe, SpansetPipelineExpression(SpansetPipeline(MetricsOperation(MetricsOperationBasic(MetricsOperationBasicType))))), Pipe, SpansetPipelineExpression(SpansetPipeline(MetricsAggregatorFunctions(MetricsAggregatorFunctionType, Integer)))))
+
+# ({} | rate()) > 10
+({} | rate()) > 10
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter)), Pipe, SpansetPipelineExpression(SpansetPipeline(MetricsOperation(MetricsOperationBasic(MetricsOperationBasicType)))))), Gt, Scalar(Integer)))
+
+# ({} | rate()) >= 5.5
+({} | rate()) >= 5.5
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter)), Pipe, SpansetPipelineExpression(SpansetPipeline(MetricsOperation(MetricsOperationBasic(MetricsOperationBasicType)))))), Gte, Scalar(Float)))
+
+# ({} | rate()) <= 0.5
+({} | rate()) <= 0.5
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter)), Pipe, SpansetPipelineExpression(SpansetPipeline(MetricsOperation(MetricsOperationBasic(MetricsOperationBasicType)))))), Lte, Scalar(Float)))
+
+# ({} | rate()) = 42
+({} | rate()) = 42
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter)), Pipe, SpansetPipelineExpression(SpansetPipeline(MetricsOperation(MetricsOperationBasic(MetricsOperationBasicType)))))), Eq, Scalar(Integer)))
+
+# ({} | rate()) != 0
+({} | rate()) != 0
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter)), Pipe, SpansetPipelineExpression(SpansetPipeline(MetricsOperation(MetricsOperationBasic(MetricsOperationBasicType)))))), Neq, Scalar(Integer)))
+
+# ({} | rate()) < 100
+({} | rate()) < 100
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter)), Pipe, SpansetPipelineExpression(SpansetPipeline(MetricsOperation(MetricsOperationBasic(MetricsOperationBasicType)))))), Lt, Scalar(Integer)))
+
+# ({} | max_over_time(duration)) > 10s
+({} | max_over_time(duration)) > 10s
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter)), Pipe, SpansetPipelineExpression(SpansetPipeline(MetricsOperation(MetricsOverTime(MetricsOverTimeType, MetricsExpression(IntrinsicField))))))), Gt, Scalar(Duration)))
+
+# ({} | rate()) + ({} | count_over_time())
+({} | rate()) + ({} | count_over_time())
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter)), Pipe, SpansetPipelineExpression(SpansetPipeline(MetricsOperation(MetricsOperationBasic(MetricsOperationBasicType)))))), ScalarOp, SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter)), Pipe, SpansetPipelineExpression(SpansetPipeline(MetricsOperation(MetricsOperationBasic(MetricsOperationBasicType))))))))
+
+# ({} | rate()) - ({} | count_over_time())
+({} | rate()) - ({} | count_over_time())
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter)), Pipe, SpansetPipelineExpression(SpansetPipeline(MetricsOperation(MetricsOperationBasic(MetricsOperationBasicType)))))), ScalarOp, SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter)), Pipe, SpansetPipelineExpression(SpansetPipeline(MetricsOperation(MetricsOperationBasic(MetricsOperationBasicType))))))))
+
+# ({} | rate()) * ({} | count_over_time())
+({} | rate()) * ({} | count_over_time())
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter)), Pipe, SpansetPipelineExpression(SpansetPipeline(MetricsOperation(MetricsOperationBasic(MetricsOperationBasicType)))))), ScalarOp, SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter)), Pipe, SpansetPipelineExpression(SpansetPipeline(MetricsOperation(MetricsOperationBasic(MetricsOperationBasicType))))))))
+
+# ({} | rate()) / ({} | count_over_time())
+({} | rate()) / ({} | count_over_time())
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter)), Pipe, SpansetPipelineExpression(SpansetPipeline(MetricsOperation(MetricsOperationBasic(MetricsOperationBasicType)))))), ScalarOp, SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter)), Pipe, SpansetPipelineExpression(SpansetPipeline(MetricsOperation(MetricsOperationBasic(MetricsOperationBasicType))))))))
+
+# ({} | rate()) * 100
+({} | rate()) * 100
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter)), Pipe, SpansetPipelineExpression(SpansetPipeline(MetricsOperation(MetricsOperationBasic(MetricsOperationBasicType)))))), ScalarOp, Scalar(Integer)))
+
+# ({} | rate()) / 1000
+({} | rate()) / 1000
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter)), Pipe, SpansetPipelineExpression(SpansetPipeline(MetricsOperation(MetricsOperationBasic(MetricsOperationBasicType)))))), ScalarOp, Scalar(Integer)))
+
+# ({} | rate()) + 5
+({} | rate()) + 5
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter)), Pipe, SpansetPipelineExpression(SpansetPipeline(MetricsOperation(MetricsOperationBasic(MetricsOperationBasicType)))))), ScalarOp, Scalar(Integer)))
+
+# 100 * ({} | rate())
+100 * ({} | rate())
+==>
+TraceQL(SpansetPipelineExpression(Scalar(Integer), ScalarOp, SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter)), Pipe, SpansetPipelineExpression(SpansetPipeline(MetricsOperation(MetricsOperationBasic(MetricsOperationBasicType))))))))
+
+# 1 / ({} | rate())
+1 / ({} | rate())
+==>
+TraceQL(SpansetPipelineExpression(Scalar(Integer), ScalarOp, SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter)), Pipe, SpansetPipelineExpression(SpansetPipeline(MetricsOperation(MetricsOperationBasic(MetricsOperationBasicType))))))))
+
+# ({} | rate()) * -100
+({} | rate()) * -100
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter)), Pipe, SpansetPipelineExpression(SpansetPipeline(MetricsOperation(MetricsOperationBasic(MetricsOperationBasicType)))))), ScalarOp, Scalar(Integer)))
+
+# ({} | rate()) * 1.5
+({} | rate()) * 1.5
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter)), Pipe, SpansetPipelineExpression(SpansetPipeline(MetricsOperation(MetricsOperationBasic(MetricsOperationBasicType)))))), ScalarOp, Scalar(Float)))
+
+# ({} | rate()) > 1 / 2
+({} | rate()) > 1 / 2
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter)), Pipe, SpansetPipelineExpression(SpansetPipeline(MetricsOperation(MetricsOperationBasic(MetricsOperationBasicType)))))), Gt, Scalar(Scalar(Integer), ScalarOp, Scalar(Integer))))
+
+# ({} | rate()) >= 100 * 3
+({} | rate()) >= 100 * 3
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter)), Pipe, SpansetPipelineExpression(SpansetPipeline(MetricsOperation(MetricsOperationBasic(MetricsOperationBasicType)))))), Gte, Scalar(Integer)), ScalarOp, Scalar(Integer)))
+
+# (1 + 2) + ({} | rate())
+(1 + 2) + ({} | rate())
+==>
+TraceQL(SpansetPipelineExpression(Scalar(Scalar(Scalar(Integer), ScalarOp, Scalar(Integer))), ScalarOp, SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter)), Pipe, SpansetPipelineExpression(SpansetPipeline(MetricsOperation(MetricsOperationBasic(MetricsOperationBasicType))))))))
+
+# ({} | rate()) * 100 > 5
+({} | rate()) * 100 > 5
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter)), Pipe, SpansetPipelineExpression(SpansetPipeline(MetricsOperation(MetricsOperationBasic(MetricsOperationBasicType)))))), ScalarOp, Scalar(Integer)), Gt, Scalar(Integer)))
+
+# ({} | rate()) * 10 + 5 > 50 | topk(1)
+({} | rate()) * 10 + 5 > 50 | topk(1)
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter)), Pipe, SpansetPipelineExpression(SpansetPipeline(MetricsOperation(MetricsOperationBasic(MetricsOperationBasicType)))))), ScalarOp, Scalar(Integer)), ScalarOp, Scalar(Integer)), Gt, Scalar(Integer)), Pipe, SpansetPipelineExpression(SpansetPipeline(MetricsAggregatorFunctions(MetricsAggregatorFunctionType, Integer)))))
+
+# ({} | count_over_time() by(.service.name)) * 100
+({} | count_over_time() by(.service.name)) * 100
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter)), Pipe, SpansetPipelineExpression(SpansetPipeline(MetricsOperation(MetricsOperationBasic(MetricsOperationBasicType, GroupOperation(FieldExpression(AttributeField(Identifier))))))))), ScalarOp, Scalar(Integer)))
+
+# {} | rate() > 10
+{} | rate() > 10
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter)), Pipe, SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(MetricsOperation(MetricsOperationBasic(MetricsOperationBasicType)))), Gt, Scalar(Integer))))
+
+# {} | rate() by (span.client_ip) >= 5.5
+{} | rate() by (span.client_ip) >= 5.5
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter)), Pipe, SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(MetricsOperation(MetricsOperationBasic(MetricsOperationBasicType, GroupOperation(FieldExpression(AttributeField(Span, Identifier))))))), Gte, Scalar(Float))))
+
+# {} | count_over_time() by (name) < 100
+{} | count_over_time() by (name) < 100
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter)), Pipe, SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(MetricsOperation(MetricsOperationBasic(MetricsOperationBasicType, GroupOperation(FieldExpression(IntrinsicField)))))), Lt, Scalar(Integer))))
+
+# {} | rate() > -3
+{} | rate() > -3
+==>
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter)), Pipe, SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(MetricsOperation(MetricsOperationBasic(MetricsOperationBasicType)))), Gt, Scalar(Integer))))
