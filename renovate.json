@@ -2,5 +2,24 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "github>grafana/grafana-renovate-config//presets/data-sources/base"
+  ],
+  "packageRules": [
+    {
+      "description": "Disable minimum release age for Grafana owned GitHub Actions (grafana/*)",
+      "matchManagers": [
+        "github-actions"
+      ],
+      "matchPackageNames": [
+        "grafana/*"
+      ],
+      "minimumReleaseAge": null
+    },
+    {
+      "description": "Don't pin peerDependencies, keep them as ranges and only widen when needed",
+      "matchDepTypes": [
+        "peerDependencies"
+      ],
+      "rangeStrategy": "widen"
+    }
   ]
 }
