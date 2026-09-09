@@ -11,6 +11,8 @@
     Anc @left
     tilde @left
     fieldOp @left
+    metricsArith @left
+    metricsCompare @left
     comparisonOp @left
     scalarOp @left
     And @left
@@ -34,6 +36,15 @@ SpansetPipelineExpression {
     SpansetPipelineExpression !Pipe Pipe SpansetPipelineExpression |
     SpansetPipelineExpression !ExperimentalOp ExperimentalOp SpansetPipelineExpression |
     SpansetPipelineExpression !UnionStructuralOp UnionStructuralOp SpansetPipelineExpression |
+    SpansetPipelineExpression !metricsCompare Gt Scalar |
+    SpansetPipelineExpression !metricsCompare Lt Scalar |
+    SpansetPipelineExpression !metricsCompare Gte Scalar |
+    SpansetPipelineExpression !metricsCompare Lte Scalar |
+    SpansetPipelineExpression !metricsCompare Eq Scalar |
+    SpansetPipelineExpression !metricsCompare Neq Scalar |
+    SpansetPipelineExpression !metricsArith ScalarOp SpansetPipelineExpression |
+    SpansetPipelineExpression !metricsArith ScalarOp Scalar |
+    Scalar !metricsArith ScalarOp SpansetPipelineExpression |
     WrappedSpansetPipeline |
     SpansetPipeline
 }
@@ -86,21 +97,38 @@ SpansetFilter {
     "{" FieldExpression "}"
 }
 
+// ScalarFilter requires at least one aggregate-containing operand (ScalarExpression).
+// Bare-literal comparisons like `3 = 2` no longer parse here (they would be a
+// MetricScalar arithmetic operand instead), mirroring the Go grammar and removing the
+// ambiguity between a leading literal and a metrics scalar.
 ScalarFilter {
-    ScalarExpression !comparisonOp ComparisonOp ScalarExpression
+    ScalarExpression !comparisonOp ComparisonOp ScalarExpression |
+    ScalarExpression !comparisonOp ComparisonOp Scalar
 }
 
+// ScalarExpression is aggregate-containing; bare literals live in Scalar. Compound
+// combinations with literals go through `ScalarExpression OP Scalar` / `Scalar OP
+// ScalarExpression`.
 ScalarExpression {
     "(" ScalarExpression !close_paren ")" |
     ScalarExpression !scalarOp ScalarOp ScalarExpression |
-    Aggregate |
+    ScalarExpression !scalarOp ScalarOp Scalar |
+    Scalar !scalarOp ScalarOp ScalarExpression |
+    Aggregate
+}
+
+// Scalar is the literal + folded-arithmetic operand used uniformly in scalar-filter
+// and metrics contexts
+Scalar {
     Integer |
     Float |
     Duration |
     TemplateVariable |
     !prefix "-" Integer |
     !prefix "-" Float |
-    !prefix "-" Duration
+    !prefix "-" Duration |
+    "(" Scalar !close_paren ")" |
+    Scalar !scalarOp ScalarOp Scalar
 }
 
 Aggregate {
@@ -281,6 +309,10 @@ HintValue {
     Or { "||" }
     Gt { ">" }
     Lt { "<" }
+    Gte { ">=" }
+    Lte { "<=" }
+    Eq { "=" }
+    Neq { "!=" }
     Desc { ">>" }
     Anc { "<<" }
     tilde { "~" }
