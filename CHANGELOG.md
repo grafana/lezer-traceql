@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.2] - 2026-09-09
+
+- Dependency updates
+- Support syntax for TraceQL Math ([#80](https://github.com/grafana/lezer-traceql/pull/80))
+
 ## [1.0.1] - 2026-01-07
 
 - Dependency updates
