@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.3] - 2026-09-10
+
+- Add support for .99 numbers (missing leading 0) and span:childCount ([#103](https://github.com/grafana/lezer-traceql/pull/103))
+
 ## [1.0.2] - 2026-09-09
 
 - Dependency updates
