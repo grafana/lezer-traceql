@@ -791,7 +791,7 @@ TraceQL(SpansetPipelineExpression(SpansetPipeline(SpansetFilter(FieldExpression(
 # Leading-dot decimal: {} | avg(span.sample) > .99
 {} | avg(span.sample) > .99
 ==>
-TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter)), Pipe, SpansetPipelineExpression(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(AttributeField(Span, Identifier)))), ComparisonOp, ScalarExpression(Float))))))
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter)), Pipe, SpansetPipelineExpression(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(AttributeField(Span, Identifier)))), ComparisonOp, Scalar(Float))))))
 
 # Leading-dot decimal: {} | quantile_over_time(span:duration, .99)
 {} | quantile_over_time(span:duration, .99)
@@ -851,7 +851,7 @@ TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(Span
 # Child count intrinsic: {} | max(span:childCount) > 0
 {} | max(span:childCount) > 0
 ==>
-TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter)), Pipe, SpansetPipelineExpression(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(IntrinsicField))), ComparisonOp, ScalarExpression(Integer))))))
+TraceQL(SpansetPipelineExpression(SpansetPipelineExpression(SpansetPipeline(SpansetFilter)), Pipe, SpansetPipelineExpression(SpansetPipeline(ScalarFilter(ScalarExpression(Aggregate(AggregateExpression, FieldExpression(IntrinsicField))), ComparisonOp, Scalar(Integer))))))
 
 # Child count intrinsic: { span:childCount = 0 } | quantile_over_time(span:duration, .99)
 { span:childCount = 0 } | quantile_over_time(span:duration, .99)
