@@ -17,14 +17,14 @@
     "test": "mocha test/test-*.js"
   },
   "devDependencies": {
-    "@lezer/lr": "1.4.10",
+    "@lezer/lr": "1.4.11",
     "@lezer/generator": "1.8.1",
     "@rollup/plugin-node-resolve": "16.0.3",
-    "mocha": "12.0.2",
-    "rollup": "4.63.5"
+    "mocha": "12.0.3",
+    "rollup": "4.64.8"
   },
   "peerDependencies": {
-    "@lezer/lr": "1.4.10"
+    "@lezer/lr": "1.4.11"
   },
   "exports": {
     "types": "./index.d.ts",
@@ -41,7 +41,7 @@
     "index.es.js",
     "package.json"
   ],
-  "packageManager": "npm@12.1.0",
+  "packageManager": "npm@12.2.0",
   "engines": {
     "node": ">=24",
     "npm": ">=11.12.1"
